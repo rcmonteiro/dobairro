@@ -1,0 +1,7 @@
+{
+  "name": "@dobairro/tsconfig",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "files": ["library.json", "node.json"]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@dobairro/domain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@dobairro/eslint-config": "workspace:*",
+    "@dobairro/prettier": "workspace:*",
+    "@dobairro/tsconfig": "workspace:*",
+    "@types/node": "^20.12.12"
+  },
+  "dependencies": {
+    "@dobairro/core": "workspace:*"
+  },
+  "prettier": "@dobairro/prettier",
+  "eslintConfig": {
+    "extends": [
+      "@dobairro/eslint-config/node"
+    ]
+  }
+}
