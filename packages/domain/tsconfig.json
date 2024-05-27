@@ -2,9 +2,10 @@
   "extends": "@dobairro/tsconfig/node.json",
   "include": ["src/**/*", "@types/**/*"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   }
 }
