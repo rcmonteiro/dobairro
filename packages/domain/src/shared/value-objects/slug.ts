@@ -24,4 +24,8 @@ export class Slug extends ValueObject<string> {
       .replace(/-$/g, '')
     return new Slug(slugText)
   }
+
+  public isEqual(slug: string): boolean {
+    return this._value === slug
+  }
 }
