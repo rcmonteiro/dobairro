@@ -1,0 +1,6 @@
+{
+  "extends": "@tbh/tsconfig/library.json",
+  "include": [
+    "index.ts"
+  ]
+}

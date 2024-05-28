@@ -6,15 +6,22 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "test": "vitest run --dir src/application/use-cases",
+    "test:watch": "vitest --dir src/application/use-cases"
+  },
   "devDependencies": {
     "@dobairro/eslint-config": "workspace:*",
     "@dobairro/prettier": "workspace:*",
-    "@dobairro/tsconfig": "workspace:*"
+    "@dobairro/tsconfig": "workspace:*",
+    "@types/node": "^20.12.12",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.6.0"
   },
   "prettier": "@dobairro/prettier",
   "eslintConfig": {
     "extends": [
-      "@dobairro/eslint-config/library"
+      "@dobairro/eslint-config/node"
     ]
   }
 }
