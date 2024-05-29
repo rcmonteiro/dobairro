@@ -1,3 +1,4 @@
+import { Button } from '@dobairro/design-system'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,13 +11,18 @@ export default function Header() {
         <Link href="/">
           <Image src={logo} alt="Do Bairro" width={161} height={40} />
         </Link>
-        <Link href="/features">Funcionalidades</Link>
-        <Link href="/testimonials">Depoimentos</Link>
-        <Link href="/pricing">Planos</Link>
+        <Link
+          href="#features-section"
+          className="underline-offset-8 hover:underline"
+        >
+          Funcionalidades
+        </Link>
+        <Link href="#testimonials-section">Depoimentos</Link>
+        <Link href="#pricing-section">Planos</Link>
       </div>
       <div className="flex items-center gap-4">
-        <button>Entrar</button>
-        <button>Iniciar agora</button>
+        <Button variant="ghost">Entrar</Button>
+        <Button>Iniciar agora</Button>
       </div>
     </header>
   )

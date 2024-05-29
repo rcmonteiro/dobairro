@@ -1,5 +1,6 @@
 'use client'
 
+import { Heading, Text } from '@dobairro/design-system'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -13,11 +14,14 @@ export default function Features() {
   }
 
   return (
-    <section className="flex w-full items-center bg-gradient-to-r from-blue-600 via-blue-700 to-blue-400 py-16">
+    <section
+      id="features-section"
+      className="from-secondary to-secondary via-primary flex w-full items-center bg-gradient-to-r py-32"
+    >
       <div className="m-auto flex flex-col gap-4 ">
-        <p className="text-center text-5xl font-bold text-white">
+        <Heading size="xl" className="text-center text-white">
           A gente descomplica para você!
-        </p>
+        </Heading>
         <p className="text-center text-xl text-slate-100">
           Tudo o que você precisa para divulgar e gerenciar as suas vendas
         </p>
@@ -30,11 +34,13 @@ export default function Features() {
                 data-selected={selected === index}
                 onClick={() => handleSelectFeature(index)}
               >
-                <h3 className="text-lg">Funcionalidade {index + 1}</h3>
-                <p className="mt-2 text-sm">
+                <Heading className="text-white">
+                  Funcionalidade {index + 1}
+                </Heading>
+                <Text className="mt-2 text-white">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
+                </Text>
               </div>
             ))}
           </div>

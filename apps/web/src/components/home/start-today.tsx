@@ -1,12 +1,16 @@
+import { Button, Heading, Text } from '@dobairro/design-system'
+
 export default function StartToday() {
   return (
-    <section className="flex w-full items-center  py-16">
-      <div className="m-auto flex flex-col gap-4 ">
-        <p className="text-center text-5xl text-blue-500">Comece hoje mesmo!</p>
-        <p className="text-center text-xl text-slate-600">
+    <section className="w-full py-32 shadow-md">
+      <div className="m-auto flex flex-col items-center gap-8 ">
+        <Heading size="xl" className=" text-center">
+          Comece hoje mesmo!
+        </Heading>
+        <Text size="lg" className="text-center">
           Não precisa de cartão de crédito, comece hoje sem compromisso.
-        </p>
-        <button>Quero começar!</button>
+        </Text>
+        <Button>Quero começar!</Button>
       </div>
     </section>
   )

@@ -2,9 +2,12 @@ import '@dobairro/design-system/styles.css'
 import '../globals.css'
 
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const defaultFont = Poppins({
+  subsets: ['latin'],
+  weight: ['100', '400', '700'],
+})
 
 export const metadata: Metadata = {
   title: 'Seja do bairro você também!',
@@ -17,9 +20,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html className="scroll-smooth" lang="en">
       <body
-        className={`${inter.className} flex h-screen flex-col items-center`}
+        className={`${defaultFont.className} flex h-screen flex-col items-center`}
       >
         {children}
       </body>

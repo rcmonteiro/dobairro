@@ -11,10 +11,12 @@
   },
   "exports": {
     "./styles.css": "./dist/index.css",
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./tailwind.preset.ts": "./tailwind.config.ts"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.5",
+    "@radix-ui/react-slot": "^1.0.2",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -22,6 +24,7 @@
     "@chromatic-com/storybook": "^1.5.0",
     "@dobairro/eslint-config": "workspace:*",
     "@dobairro/prettier": "workspace:*",
+    "@dobairro/tsconfig": "workspace:*",
     "@storybook/addon-essentials": "^8.1.4",
     "@storybook/addon-interactions": "^8.1.4",
     "@storybook/addon-links": "^8.1.4",

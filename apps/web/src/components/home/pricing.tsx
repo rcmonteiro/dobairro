@@ -1,14 +1,16 @@
+import { Card, Heading } from '@dobairro/design-system'
+
 export default function Pricing() {
   return (
-    <section className="flex max-w-5xl flex-col py-16">
+    <section id="pricing-section" className="flex max-w-5xl flex-col py-16">
       <div className="m-auto flex flex-col gap-4 ">
-        <p className="text-center text-5xl text-blue-500">
+        <Heading size="xl" className="text-center">
           Invista em você mesma!
-        </p>
+        </Heading>
       </div>
       <div className="mt-8 grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-4">
         {Array.from({ length: 3 }).map((_, index) => (
-          <div
+          <Card.Root
             key={index}
             className="rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10"
           >
@@ -17,7 +19,7 @@ export default function Pricing() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-          </div>
+          </Card.Root>
         ))}
       </div>
     </section>
