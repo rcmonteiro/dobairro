@@ -1,15 +1,16 @@
 {
-  "name": "web",
+  "name": "@dobairro/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "start:dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.5",
+    "@dobairro/design-system": "workspace:*",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"

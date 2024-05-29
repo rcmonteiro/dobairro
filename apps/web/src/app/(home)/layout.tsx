@@ -1,3 +1,4 @@
+import '@dobairro/design-system/styles.css'
 import '../globals.css'
 
 import type { Metadata } from 'next'
