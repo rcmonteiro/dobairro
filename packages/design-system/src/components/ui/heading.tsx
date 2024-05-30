@@ -8,8 +8,8 @@ const headingVariants = tv({
     size: {
       sm: 'text-lg',
       md: 'text-xl',
-      lg: 'text-3xl',
-      xl: 'text-6xl',
+      lg: 'text-2xl sm:text-3xl',
+      xl: 'text-4xl sm:text-6xl',
     },
   },
 

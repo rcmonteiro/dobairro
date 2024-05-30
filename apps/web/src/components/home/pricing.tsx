@@ -1,26 +1,65 @@
-import { Card, Heading } from '@dobairro/design-system'
+import {
+  Heading,
+  PricingCard,
+  PricingCardCTA,
+  PricingCardDescription,
+  PricingCardFeatures,
+  PricingCardPrice,
+  PricingCardTitle,
+} from '@dobairro/design-system'
 
 export default function Pricing() {
   return (
-    <section id="pricing-section" className="flex max-w-5xl flex-col py-16">
-      <div className="m-auto flex flex-col gap-4 ">
-        <Heading size="xl" className="text-center">
-          Invista em você mesma!
-        </Heading>
-      </div>
-      <div className="mt-8 grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-4">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <Card.Root
-            key={index}
-            className="rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10"
-          >
-            <h3 className="text-5xl">R${index}</h3>
-            <p className="mt-2 text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </Card.Root>
-        ))}
+    <section
+      id="pricing-section"
+      className="w-full bg-secondary px-4 py-16 sm:px-0 sm:py-32"
+    >
+      <div className="m-auto flex max-w-5xl flex-col">
+        <div className="flex flex-col items-center gap-4 ">
+          <Heading size="xl" className="text-white">
+            Invista em você mesma!
+          </Heading>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <PricingCard>
+            <PricingCardPrice>R$9</PricingCardPrice>
+            <PricingCardTitle>Pequeno</PricingCardTitle>
+            <PricingCardDescription>Teste teste...</PricingCardDescription>
+            <PricingCardCTA>Iniciar agora</PricingCardCTA>
+            <PricingCardFeatures>
+              <ul>
+                <li>Feature #1</li>
+                <li>Feature #2</li>
+              </ul>
+            </PricingCardFeatures>
+          </PricingCard>
+
+          <PricingCard variant="highlight">
+            <PricingCardPrice>R$18</PricingCardPrice>
+            <PricingCardTitle>Pequeno</PricingCardTitle>
+            <PricingCardDescription>Teste teste...</PricingCardDescription>
+            <PricingCardCTA>Iniciar agora</PricingCardCTA>
+            <PricingCardFeatures>
+              <ul>
+                <li>Feature #1</li>
+                <li>Feature #2</li>
+              </ul>
+            </PricingCardFeatures>
+          </PricingCard>
+
+          <PricingCard>
+            <PricingCardPrice>R$89</PricingCardPrice>
+            <PricingCardTitle>Pequeno</PricingCardTitle>
+            <PricingCardDescription>Teste teste...</PricingCardDescription>
+            <PricingCardCTA>Iniciar agora</PricingCardCTA>
+            <PricingCardFeatures>
+              <ul>
+                <li>Feature #1</li>
+                <li>Feature #2</li>
+              </ul>
+            </PricingCardFeatures>
+          </PricingCard>
+        </div>
       </div>
     </section>
   )

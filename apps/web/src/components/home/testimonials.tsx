@@ -1,26 +1,38 @@
-import { Card, Heading, Text } from '@dobairro/design-system'
+import {
+  Avatar,
+  AvatarImage,
+  AvatarName,
+  AvatarRole,
+  Card,
+  Heading,
+  Text,
+} from '@dobairro/design-system'
 
 export default function Testimonials() {
   return (
-    <section id="testimonials-section" className="w-full shadow-md">
-      <div className=" m-auto flex max-w-5xl flex-col py-32">
+    <section
+      id="testimonials-section"
+      className="w-full px-4 py-16 shadow-md sm:py-32 lg:px-0"
+    >
+      <div className=" m-auto flex max-w-5xl flex-col">
         <div className="m-auto flex flex-col gap-4 ">
           <Heading size="xl" className="text-center">
             Histórias de sucesso
           </Heading>
         </div>
-        <div className="mt-8 grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-4">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
-            <Card.Root
-              key={index}
-              className="rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10"
-            >
+            <Card key={index}>
               <Text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </Text>
-              <Heading size="md">Pessoa {index}</Heading>
-            </Card.Root>
+              <Avatar size="full">
+                <AvatarImage src="/images/avatar.png" />
+                <AvatarName>Ricardo Monteiro</AvatarName>
+                <AvatarRole>Developer</AvatarRole>
+              </Avatar>
+            </Card>
           ))}
         </div>
       </div>

@@ -2,7 +2,7 @@ import { Button, Heading, Text } from '@dobairro/design-system'
 
 export default function Hero() {
   return (
-    <section className="flex w-full max-w-4xl flex-col items-center justify-between gap-8 py-32">
+    <section className="flex w-full max-w-4xl flex-col items-center justify-between gap-8 px-4 py-16 sm:px-0 sm:py-32">
       <Heading as="h1" size="xl" className="text-center">
         Transforme suas receitas
         <br />
