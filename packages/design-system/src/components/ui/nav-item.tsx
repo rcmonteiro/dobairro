@@ -37,9 +37,9 @@ const NavItem = React.forwardRef<HTMLAnchorElement, NavItemProps>(
         {...props}
         className={navItemVariants({ className, current })}
       >
-        <div className="absolute left-0 size-12 top-0 inset-0 z-0 bg-primary rounded-full transform group-hover:w-full transition-all duration-150" />
-        <Icon className="relative z-10 size-12 text-white rounded-full p-3" />
-        <span className="relative z-10 font-medium group-hover:text-white transition-colors ease-in-out duration-150">
+        <div className="absolute left-0 size-12 top-0 inset-0 z-0 border border-primary rounded-full transform group-hover:w-full transition-all duration-300 ease-in-out delay-200" />
+        <Icon className="relative z-10 size-12 bg-primary text-white rounded-full p-3" />
+        <span className="relative z-10 font-medium">
           {title}
         </span>
       </a>
