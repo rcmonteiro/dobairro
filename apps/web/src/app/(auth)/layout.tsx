@@ -3,10 +3,14 @@ import '../globals.css'
 
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import logo from '../../assets/dobairro-small.png'
 
 const defaultFont = Poppins({
   subsets: ['latin'],
-  weight: ['100', '400', '700'],
+  weight: ['100', '400', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -27,7 +31,16 @@ export default function RootLayout({
       <body
         className={`${defaultFont.className} flex h-screen flex-col items-center`}
       >
-        {children}
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="Do Bairro"
+            width={161}
+            height={40}
+            className="mt-4"
+          />
+        </Link>
+        <div className="py-32">{children}</div>
       </body>
     </html>
   )

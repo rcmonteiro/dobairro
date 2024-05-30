@@ -4,6 +4,8 @@ import '../globals.css'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 
+import { Sidebar } from '@/components/panel/sidebar'
+
 const defaultFont = Poppins({
   subsets: ['latin'],
   weight: ['100', '400', '700'],
@@ -24,10 +26,13 @@ export default function RootLayout({
       className="scroll-smooth antialiased selection:bg-primary selection:text-white"
       lang="en"
     >
-      <body
-        className={`${defaultFont.className} flex h-screen flex-col items-center`}
-      >
-        {children}
+      <body className={`${defaultFont.className}`}>
+        <div className="lg:grid-cols-app relative min-h-screen lg:grid">
+          <Sidebar />
+          <main className="max-w-[100vw] pt-16 lg:col-start-2 lg:pt-0">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   )
