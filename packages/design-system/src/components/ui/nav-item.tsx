@@ -3,13 +3,13 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 const navItemVariants = tv({
   base: [
-    'group relative flex items-center gap-2 cursor-pointer rounded-full'
+    'group relative text-white flex items-center gap-2 cursor-pointer rounded-full'
   ],
 
   variants: {
     current: {
-      true: 'bg-primary text-white [&_svg]:text-white',
-      false: 'text-default'
+      true: 'bg-primary  [&_svg]:text-white',
+      false: ''
     }
   },
 
@@ -37,9 +37,9 @@ const NavItem = React.forwardRef<HTMLAnchorElement, NavItemProps>(
         {...props}
         className={navItemVariants({ className, current })}
       >
-        <div className="absolute left-0 size-12 top-0 inset-0 z-0 border border-primary rounded-full transform group-hover:w-full transition-all duration-300 ease-in-out delay-200" />
+        <div className="absolute left-0 size-12 top-0 inset-0 z-0 border border-primary bg-primary/50 rounded-full transform group-hover:w-full transition-all duration-300 ease-in-out delay-200" />
         <Icon className="relative z-10 size-12 bg-primary text-white rounded-full p-3" />
-        <span className="relative z-10 font-medium">
+        <span className="relative z-10">
           {title}
         </span>
       </a>

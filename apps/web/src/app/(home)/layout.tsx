@@ -2,11 +2,11 @@ import '@dobairro/design-system/styles.css'
 import '../globals.css'
 
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 
-const defaultFont = Poppins({
+const defaultFont = Open_Sans({
   subsets: ['latin'],
-  weight: ['100', '400', '700'],
+  weight: ['300', '400', '600', '700'],
 })
 
 export const metadata: Metadata = {

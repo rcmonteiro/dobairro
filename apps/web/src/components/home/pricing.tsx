@@ -17,7 +17,7 @@ export default function Pricing() {
       <div className="m-auto flex max-w-5xl flex-col">
         <div className="flex flex-col items-center gap-4 ">
           <Heading size="xl" className="text-white">
-            Invista em você mesma!
+            Invista em você!
           </Heading>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">

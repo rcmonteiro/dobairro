@@ -2,13 +2,13 @@ import '@dobairro/design-system/styles.css'
 import '../globals.css'
 
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 
 import { Sidebar } from '@/components/panel/sidebar'
 
-const defaultFont = Poppins({
+const defaultFont = Open_Sans({
   subsets: ['latin'],
-  weight: ['100', '400', '700'],
+  weight: ['300', '400', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -27,9 +27,9 @@ export default function RootLayout({
       lang="en"
     >
       <body className={`${defaultFont.className}`}>
-        <div className="lg:grid-cols-app relative min-h-screen lg:grid">
+        <div className="relative min-h-screen lg:grid lg:grid-cols-app">
           <Sidebar />
-          <main className="max-w-[100vw] pt-16 lg:col-start-2 lg:pt-0">
+          <main className="max-w-[100vw] bg-default/10 pt-16 lg:col-start-2 lg:pt-0">
             {children}
           </main>
         </div>

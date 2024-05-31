@@ -4,22 +4,21 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 const buttonVariants = tv({
   base: [
-    'rounded-full py-2 px-6 ring-offset-background',
+    'rounded-full py-2 px-6 ring-offset-background flex items-center whitespace-nowrap flex-nowrap',
     'hover:ring-4 transition ease-in-out duration-200'
   ],
 
   variants: {
     size: {
       icon: 'p-2',
-      sm: 'text-lg',
+      small: 'text-sm',
       md: 'text-base',
-      lg: 'text-3xl',
-      xl: 'text-6xl',
     },
     variant: {
       primary: 'bg-primary text-white ring-primary/20',
       secondary: 'bg-secondary text-white ring-secondary/20',
       ghost: 'text-default ring-default/20',
+      outline: 'text-default border border-default/50 ring-secondary/20',
     },
   },
 
