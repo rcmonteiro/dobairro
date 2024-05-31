@@ -28,7 +28,7 @@ export default function Testimonials() {
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </Text>
               <Avatar size="full" className="mt-4">
-                <AvatarImage src="/images/avatar.png" />
+                <AvatarImage className="size-12" src="/images/avatar.png" />
                 <AvatarName>Ricardo Monteiro</AvatarName>
                 <AvatarRole>Developer</AvatarRole>
               </Avatar>

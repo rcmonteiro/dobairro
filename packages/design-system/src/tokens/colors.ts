@@ -11,5 +11,6 @@ export const colors = {
 
   primary: '#F21D2F',
   secondary: '#2B26BF',
-  default: '#0d0d0d'
+  default: '#0d0d0d',
+  light: '#F2F2F2'
 }

@@ -1,3 +1,4 @@
+import Container from '@/components/panel/container'
 import { DayOrdersAmountCard } from '@/components/panel/dashboard/day-orders-amount-card'
 import { MonthCanceledCard } from '@/components/panel/dashboard/month-canceled-card'
 import { MonthOrdersAmountCard } from '@/components/panel/dashboard/month-orders-amount-card'
@@ -8,9 +9,9 @@ import Header from '@/components/panel/header'
 
 export default function Dashboard() {
   return (
-    <>
+    <Container>
       <Header>Resultados</Header>
-      <div className="space-y-4 p-8">
+      <div className="space-y-4">
         <div className="grid grid-cols-4 gap-4">
           <MonthRevenueCard />
           <MonthOrdersAmountCard />
@@ -22,6 +23,6 @@ export default function Dashboard() {
           <RevenueChart />
         </div>
       </div>
-    </>
+    </Container>
   )
 }

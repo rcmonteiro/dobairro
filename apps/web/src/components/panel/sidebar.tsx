@@ -3,9 +3,9 @@
 import { Button, NavItem } from '@dobairro/design-system'
 import {
   ChartLineUp,
+  ForkKnife,
   List,
   Package,
-  Sliders,
   Storefront,
   Users,
 } from '@phosphor-icons/react'
@@ -23,7 +23,7 @@ export const Sidebar = () => {
       <div className="flex items-center justify-between">
         <Image
           src={logo}
-          className="ml-2"
+          className="mb-4 ml-2"
           alt="Do Bairro"
           width={161}
           height={40}
@@ -53,22 +53,22 @@ export const Sidebar = () => {
             title="Gerenciar pedidos"
           />
           <NavItem
+            href="/products"
+            current={path === '/products'}
+            icon={ForkKnife}
+            title="Produtos"
+          />
+          <NavItem
             href="/store"
             current={path === '/store'}
             icon={Storefront}
             title="Sua loja"
           />
           <NavItem
-            href="/settings"
-            current={path === '/settings'}
-            icon={Sliders}
-            title="Configurações"
-          />
-          <NavItem
             href="/users"
             current={path === '/users'}
             icon={Users}
-            title="Usuários"
+            title="Equipe"
           />
         </nav>
       </Collapsible.Content>

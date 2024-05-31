@@ -11,6 +11,7 @@ const avatarVariants = tv({
     size: {
       icon: '',
       full: 'grid grid-cols-2 grid-rows-2 border-t border-primary/50 pt-4',
+      big: 'flex flex-col items-center gap-2',
     },
   },
 
@@ -23,7 +24,7 @@ interface AvatarProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof avatarVariants> {
       children: ReactNode
-      size?: 'icon' | 'full'
+      size?: 'icon' | 'full' | 'big'
     }
 
 const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
@@ -37,7 +38,7 @@ Avatar.displayName = 'Avatar'
 
 const AvatarImage = React.forwardRef<HTMLImageElement, React.ImgHTMLAttributes<HTMLImageElement>>(
   ({ className, ...props }, ref) => {
-    return <img ref={ref} {...props} className={cm("rounded-full size-12 row-span-2", className)} />
+    return <img ref={ref} {...props} className={cm("rounded-full row-span-2", className)} />
   },
 )
 AvatarImage.displayName = 'AvatarImage'

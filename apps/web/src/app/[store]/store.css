@@ -1,0 +1,49 @@
+:root {
+  --primary-bg: #3E7E6C;
+  --primary-fg: #fff;
+  --background-color: #fff;
+  --card-bg: #F6F5F2;
+  --card-fg: #333;
+  --highlight-bg: #FCBD18;
+  --highlight-fg: #212121;
+  --text-color: #333;
+}
+
+[data-theme='blue-gray'] {
+  --primary-bg: #3D4A80;
+  --primary-fg: #fff;
+  --background-color: #fff;
+  --card-bg: #C6D1FF;
+  --card-fg: #333;
+  --highlight-bg: #7994FF;
+  --highlight-fg: #F6F5F2;
+  --text-color: #333;
+}
+
+.dobairro-store header, .product-item {
+  background-color: var(--card-bg);
+  color: var(--card-fg);
+}
+
+.dobairro-store .product-price {
+  background-color: var(--highlight-bg);
+  color: var(--highlight-fg);
+}
+
+.dobairro-store .product-button {
+  background-color: var(--primary-bg);
+  color: var(--primary-fg);
+}
+
+.dobairro-store .categories {
+  border-bottom: 2px solid var(--primary-bg);
+}
+
+.dobairro-store .categories a:hover {
+  background-color: var(--primary-bg);
+  color: var(--primary-fg);
+}
+
+.dobairro-store {
+  background-color: var(--background-color);
+}
