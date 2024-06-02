@@ -6,7 +6,7 @@ import { Poppins } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import logo from '../../assets/dobairro-small.png'
+import logo from '../../assets/logo-dobairro.svg'
 
 const defaultFont = Poppins({
   subsets: ['latin'],

@@ -13,6 +13,7 @@ const buttonVariants = tv({
       icon: 'p-2',
       small: 'text-sm',
       md: 'text-base',
+      large: 'text-lg py-4 px-8 font-semibold',
     },
     variant: {
       primary: 'bg-primary text-white ring-primary/20',

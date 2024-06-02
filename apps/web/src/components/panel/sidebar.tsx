@@ -13,7 +13,7 @@ import * as Collapsible from '@radix-ui/react-collapsible'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-import logo from '../../assets/dobairro-small-white.png'
+import logo from '../../assets/logo-dobairro-white.svg'
 
 export const Sidebar = () => {
   const path = usePathname()

@@ -1,8 +1,8 @@
-import { Button, NavLink } from '@dobairro/design-system'
+import { Button } from '@dobairro/design-system'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import logo from '../assets/dobairro-small.png'
+import logo from '../assets/logo-dobairro.svg'
 
 export default function Header() {
   return (
@@ -11,18 +11,6 @@ export default function Header() {
         <Link href="/">
           <Image src={logo} alt="Do Bairro" width={161} height={40} />
         </Link>
-
-        <div className="hidden gap-4 md:flex">
-          <NavLink asChild={true}>
-            <Link href="#features-section">Funcionalidades</Link>
-          </NavLink>
-          <NavLink asChild={true}>
-            <Link href="#testimonials-section">Depoimentos</Link>
-          </NavLink>
-          <NavLink asChild={true}>
-            <Link href="#pricing-section">Planos</Link>
-          </NavLink>
-        </div>
       </div>
       <div className="flex items-center gap-4">
         <Button variant="ghost">
