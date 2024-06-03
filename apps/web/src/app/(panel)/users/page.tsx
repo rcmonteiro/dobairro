@@ -27,11 +27,11 @@ export default function Users() {
             <CardContent>
               <div className="flex justify-around gap-2">
                 <Button variant="outline" size="small" className="bg-white">
-                  <Pencil className="mr-2 h-3 w-3" />
+                  <Pencil className="mr-2 size-3" />
                   Editar acesso
                 </Button>
                 <Button variant="outline" size="small" className="bg-white">
-                  <Trash className="mr-2 h-3 w-3" />
+                  <Trash className="mr-2 size-3" />
                   Remover acesso
                 </Button>
               </div>

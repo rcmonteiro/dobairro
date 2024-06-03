@@ -9,7 +9,7 @@ interface OrderStatusProps {
   status: TOrderStatus
 }
 
-const orderStatusMap: Record<TOrderStatus, string> = {
+export const orderStatusMap: Record<TOrderStatus, string> = {
   pending: 'Pendente',
   canceled: 'Cancelado',
   processing: 'Em preparo',

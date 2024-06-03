@@ -27,7 +27,7 @@ export const RevenueChart = () => {
     { date: '16/03', receipt: 40090 },
     { date: '15/03', receipt: 30090 },
     { date: '14/03', receipt: 21090 },
-  ]
+  ].reverse()
 
   const cardData = useMemo(() => {
     return revenueByPeriod?.map((item) => {
@@ -71,9 +71,9 @@ export const RevenueChart = () => {
             />
             <CartesianGrid vertical={false} className=" stroke-muted" />
             <Line
-              type="linear"
+              type="natural"
               stroke={twColors.blue['400']}
-              strokeWidth={2}
+              strokeWidth={6}
               dataKey="receipt"
             />
           </LineChart>

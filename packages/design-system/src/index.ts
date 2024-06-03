@@ -8,6 +8,7 @@ export * from './components/ui/label'
 export * from './components/ui/nav-item'
 export * from './components/ui/nav-link'
 export * from './components/ui/pricing'
+export * from './components/ui/select'
 export * from './components/ui/table'
 export * from './components/ui/text'
 

@@ -31,7 +31,7 @@ export const OrderItem = ({ order }: OrderItemProps) => {
           onOpenChange={setOrderDetailsOpen}
         >
           <Dialog.Trigger asChild>
-            <Button size="icon">
+            <Button variant="secondary" size="icon">
               <MagnifyingGlass size={16} />
               <span className="sr-only">Detalhes do pedido</span>
             </Button>

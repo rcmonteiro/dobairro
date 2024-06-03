@@ -2,14 +2,14 @@ import { Button, Heading, Text } from '@dobairro/design-system'
 
 export default function StartToday() {
   return (
-    <section className="w-full px-4 py-16 shadow-md sm:px-0 sm:py-32">
+    <section className="w-full px-4 py-16 sm:px-0 sm:py-32">
       <div className="m-auto flex  max-w-4xl flex-col items-center gap-8 ">
         <Heading size="xl" className=" text-center">
           Comece hoje mesmo!
         </Heading>
         <Text size="lg" className="text-center leading-9">
           <Text as="strong" className="text-primary">
-            DoBairro
+            Do Bairro
           </Text>{' '}
           é a plataforma que transforma o comércio local. Aqui, você não só
           ganha uma{' '}

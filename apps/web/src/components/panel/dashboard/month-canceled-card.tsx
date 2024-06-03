@@ -5,7 +5,7 @@ import {
   CardTitle,
   Heading,
 } from '@dobairro/design-system'
-import { CurrencyDollar } from '@phosphor-icons/react/dist/ssr'
+import { ChartLineDown } from '@phosphor-icons/react/dist/ssr'
 
 import { formatNumber } from '@/utils/formatters'
 
@@ -17,7 +17,7 @@ export const MonthCanceledCard = () => {
   return (
     <Card>
       <CardHeader className="pb2 flex flex-row items-center justify-between space-y-0">
-        <CurrencyDollar className="size-10 rounded-full bg-secondary p-2 text-white" />
+        <ChartLineDown className="size-10 rounded-full bg-default p-2 text-white" />
         <CardTitle className="text-md font-semibold text-default/80">
           Cancelamentos (mês)
         </CardTitle>
@@ -27,11 +27,11 @@ export const MonthCanceledCard = () => {
           <Heading size="lg">{formatNumber(cardData?.amount)}</Heading>
           <p className="text-xs">
             {cardData.diffFromLastMonth < 0 ? (
-              <span className="text-green font-semibold">
+              <span className="font-semibold text-green">
                 {cardData?.diffFromLastMonth}%
               </span>
             ) : (
-              <span className="text-red font-semibold">
+              <span className="font-semibold text-red">
                 +{cardData?.diffFromLastMonth}%
               </span>
             )}{' '}

@@ -20,6 +20,17 @@
   --text-color: #333;
 }
 
+[data-theme='summer'] {
+  --primary-bg: #F38882;
+  --primary-fg: #fff;
+  --background-color: #fff;
+  --card-bg: #FFE7CC;
+  --card-fg: #333;
+  --highlight-bg: #71D3D0;
+  --highlight-fg: #F6F5F2;
+  --text-color: #333;
+}
+
 .dobairro-store header, .product-item {
   background-color: var(--card-bg);
   color: var(--card-fg);

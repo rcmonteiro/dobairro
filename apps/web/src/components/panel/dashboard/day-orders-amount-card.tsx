@@ -18,7 +18,7 @@ export const DayOrdersAmountCard = () => {
   return (
     <Card>
       <CardHeader className="pb2 flex flex-row items-center justify-between space-y-0">
-        <ForkKnife className="size-10 rounded-full bg-secondary p-2 text-white" />
+        <ForkKnife className="size-10 rounded-full bg-default p-2 text-white" />
         <CardTitle className="text-md font-semibold text-default/80">
           Pedidos (dia)
         </CardTitle>
@@ -29,11 +29,11 @@ export const DayOrdersAmountCard = () => {
           <Heading size="lg">{formatNumber(cardData?.amount)}</Heading>
           <p className="text-muted-foreground text-xs">
             {cardData.diffFromYesterday > 0 ? (
-              <span className="text-green font-semibold">
+              <span className="font-semibold text-green">
                 +{cardData?.diffFromYesterday}%
               </span>
             ) : (
-              <span className="text-red font-semibold">
+              <span className="font-semibold text-red">
                 {cardData?.diffFromYesterday}%
               </span>
             )}{' '}

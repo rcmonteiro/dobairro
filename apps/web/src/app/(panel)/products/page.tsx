@@ -8,12 +8,18 @@ import {
 
 import Container from '@/components/panel/container'
 import Header from '@/components/panel/header'
+import { ProductFilter } from '@/components/panel/products/product-filter'
 import { ProductItem } from '@/components/panel/store/product-item'
 
 export default function Store() {
   return (
     <Container>
       <Header>Sua loja</Header>
+
+      <div className="mb-8">
+        <ProductFilter />
+      </div>
+
       <div className="overflow-hidden rounded-lg">
         <Table>
           <TableHeader>

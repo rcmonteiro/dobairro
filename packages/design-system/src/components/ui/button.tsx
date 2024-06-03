@@ -4,7 +4,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 const buttonVariants = tv({
   base: [
-    'rounded-full py-2 px-6 ring-offset-background flex items-center whitespace-nowrap flex-nowrap',
+    'rounded-full py-2 px-6 ring-offset-background flex justify-between gap-2 items-center whitespace-nowrap flex-nowrap',
     'hover:ring-4 transition ease-in-out duration-200'
   ],
 
@@ -17,9 +17,9 @@ const buttonVariants = tv({
     },
     variant: {
       primary: 'bg-primary text-white ring-primary/20',
-      secondary: 'bg-secondary text-white ring-secondary/20',
+      secondary: 'bg-default text-white ring-secondary/20',
       ghost: 'text-default ring-default/20',
-      outline: 'text-default border border-default/50 ring-secondary/20',
+      outline: 'text-default bg-white border border-default/50 ring-secondary/20',
     },
   },
 

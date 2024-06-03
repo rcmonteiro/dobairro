@@ -8,6 +8,7 @@ import {
 
 import Container from '@/components/panel/container'
 import Header from '@/components/panel/header'
+import { OrderFilter } from '@/components/panel/orders/order-filter'
 import { OrderItem } from '@/components/panel/orders/order-item'
 import type { TOrderStatus } from '@/components/panel/orders/order-status'
 
@@ -15,12 +16,18 @@ export default function Orders() {
   return (
     <Container>
       <Header>Gerenciar pedidos</Header>
+
+      <div className="mb-8">
+        <OrderFilter />
+      </div>
+
       <div className="overflow-hidden rounded-lg">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[64px]"></TableHead>
-              <TableHead className="w-[140px]">Idenfificador</TableHead>
+              <TableHead className="w-[140px]" colSpan={2}>
+                Idenfificador
+              </TableHead>
               <TableHead className="w-[180px]">Realizado há</TableHead>
               <TableHead className="w-[140px]">Status</TableHead>
               <TableHead>Cliente</TableHead>

@@ -11,12 +11,13 @@ import {
 import Image from 'next/image'
 import { useState } from 'react'
 
-import feature1 from '../../assets/feature-dashboard.png'
-import feature3 from '../../assets/feature-order-detail.png'
-import feature2 from '../../assets/feature-orders.png'
+import feature1 from '../../assets/home/feature-dashboard.png'
+import feature2 from '../../assets/home/feature-orders.png'
+import feature3 from '../../assets/home/feature-products.png'
+import feature4 from '../../assets/home/feature-store.png'
 
 export default function Features() {
-  const images = [feature1, feature2, feature3, feature1]
+  const images = [feature1, feature2, feature3, feature4]
   const [selected, setSelected] = useState({
     index: 0,
     image: images[0],
@@ -47,34 +48,36 @@ export default function Features() {
               data-selected={selected.index === 0}
               onClick={() => handleSelectFeature(0)}
             >
-              <Heading className="text-white">Visão Geral de Vendas</Heading>
+              <Heading className="text-white">Resultados de vendas</Heading>
               <Text className="mt-2 text-white">
-                Acompanhe o desempenho do seu negócio com gráficos detalhados
-                das vendas do mês e do dia.
+                Acompanhe os resultados de suas vendas com facilidade
               </Text>
             </FeatureTabsTab>
             <FeatureTabsTab
               data-selected={selected.index === 1}
               onClick={() => handleSelectFeature(1)}
             >
-              <Heading className="text-white">
-                Gerencie seus Pedidos com Eficiência
-              </Heading>
+              <Heading className="text-white">Gerencie seus Pedidos</Heading>
               <Text className="mt-2 text-white">
-                Visualize, organize e processe seus pedidos com facilidade, tudo
-                em um só lugar.
+                Controle todo o fluxo de pedidos com facilidade
               </Text>
             </FeatureTabsTab>
             <FeatureTabsTab
               data-selected={selected.index === 2}
               onClick={() => handleSelectFeature(2)}
             >
-              <Heading className="text-white">
-                Informações Completas de Cada Pedido
-              </Heading>
+              <Heading className="text-white">Gerenciar produtos</Heading>
               <Text className="mt-2 text-white">
-                Acesse todos os detalhes de cada pedido, incluindo produtos,
-                valores e status.
+                Controle total dos produtos que você está vendendo
+              </Text>
+            </FeatureTabsTab>
+            <FeatureTabsTab
+              data-selected={selected.index === 3}
+              onClick={() => handleSelectFeature(3)}
+            >
+              <Heading className="text-white">Sua presença digital</Heading>
+              <Text className="mt-2 text-white">
+                Personalize sua loja virtual com simplicidade e rapidez
               </Text>
             </FeatureTabsTab>
           </FeatureTabsOptions>
