@@ -1,4 +1,5 @@
 import { Organization } from '@/domain/entities/organization'
+import { Theme } from '@/domain/entities/theme'
 import type { Id } from '@/domain/types/id'
 import { Slug } from '@/domain/value-objects/slug'
 
@@ -31,9 +32,17 @@ export class CreateOrganizationUseCase {
       return left(new SlugAlreadyExistsError())
     }
 
-    const org = await this.organizationRepo.create(
-      Organization.create({ ...dto, slug }),
-    )
+    const newOrg = Organization.create({
+      ownerId: dto.ownerId,
+      name: dto.name,
+      theme: Theme.create({
+        name: 'default',
+        colors: ['#3E7E6C', '#FCBD18', '#F6F5F2'],
+      }),
+      slug,
+    })
+
+    const org = await this.organizationRepo.create(newOrg)
 
     return right({ org })
   }

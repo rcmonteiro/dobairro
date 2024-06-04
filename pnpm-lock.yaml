@@ -204,6 +204,9 @@ importers:
       '@dobairro/tsconfig':
         specifier: workspace:*
         version: link:../../config/typescript-config
+      '@faker-js/faker':
+        specifier: ^8.4.1
+        version: 8.4.1
       '@types/node':
         specifier: ^20.12.12
         version: 20.12.12
