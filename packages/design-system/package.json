@@ -49,7 +49,7 @@
   "prettier": "@dobairro/prettier",
   "eslintConfig": {
     "extends": [
-      "@dobairro/eslint-config/react",
+      "@dobairro/eslint-config/library",
       "plugin:storybook/recommended"
     ]
   }
