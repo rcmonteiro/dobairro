@@ -1,12 +1,10 @@
 import { Entity } from '../types/entity'
 import type { Id } from '../types/id'
 import type { Role } from '../types/role'
-import type { Organization } from './organization'
-import type { User } from './user'
 
 export interface IMember {
-  organization: Organization
-  user: User
+  organizationId: Id
+  userId: Id
   role: Role
   createdAt?: Date
 }
@@ -16,12 +14,12 @@ export class Member extends Entity<IMember> {
     super(state, id)
   }
 
-  public get organization(): Organization {
-    return this.state.organization
+  public get organizationId(): Id {
+    return this.state.organizationId
   }
 
-  public get user(): User {
-    return this.state.user
+  public get userId(): Id {
+    return this.state.userId
   }
 
   public get role(): Role {

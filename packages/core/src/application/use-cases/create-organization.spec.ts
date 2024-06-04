@@ -26,6 +26,7 @@ describe('Create Organization Use case - unit tests', () => {
 
     expect(result.isRight).toBeTruthy()
     expect(organizationRepo.items[0].name).toBe('Cakes from Doe')
+    expect(organizationRepo.items[0].members[0].role).toBe('ADMIN')
   })
 
   it('should not be able to create an organization with the same slug', async () => {

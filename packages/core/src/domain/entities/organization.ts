@@ -1,6 +1,7 @@
 import { Entity } from '../types/entity'
 import type { Id } from '../types/id'
 import { Slug } from '../value-objects/slug'
+import { Member } from './member'
 import type { Theme } from './theme'
 
 export interface IOrganization {
@@ -8,6 +9,7 @@ export interface IOrganization {
   name: string
   theme: Theme
   slug: Slug
+  members?: Member[]
   createdAt?: Date
   updatedAt?: Date
 }
@@ -15,6 +17,17 @@ export interface IOrganization {
 export class Organization extends Entity<IOrganization> {
   private constructor(state: IOrganization, id?: Id) {
     super(state, id)
+    this.state.members = [
+      Member.create({
+        organizationId: this.id,
+        role: 'ADMIN',
+        userId: this.state.ownerId,
+      }),
+    ]
+  }
+
+  public addMember(member: Member) {
+    this.state?.members?.push(member)
   }
 
   public get slug(): Slug {
@@ -27,6 +40,10 @@ export class Organization extends Entity<IOrganization> {
 
   public get theme(): Theme {
     return this.state.theme
+  }
+
+  public get members(): Member[] {
+    return this.state.members ?? []
   }
 
   public get createdAt(): Date | undefined {
