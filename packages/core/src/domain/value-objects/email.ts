@@ -20,4 +20,8 @@ export class Email extends ValueObject<string> {
   public get value(): string {
     return this._value
   }
+
+  public isEqual(email: string): boolean {
+    return this._value === email
+  }
 }

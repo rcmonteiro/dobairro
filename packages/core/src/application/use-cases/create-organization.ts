@@ -2,9 +2,9 @@ import { Organization } from '@/domain/entities/organization'
 import type { Id } from '@/domain/types/id'
 import { Slug } from '@/domain/value-objects/slug'
 
-import { type Either, right } from '../either'
+import { type Either, left, right } from '../either'
 import type { OrganizationRepo } from '../repositories/organization-repo'
-import { SlugAlreadyExistsError } from './_errors/slug-already-exists-error'
+import { SlugAlreadyExistsError } from './_errors/slug-already-exists-error copy'
 
 interface CreateOrganizationUseCaseRequest {
   ownerId: Id
@@ -28,7 +28,7 @@ export class CreateOrganizationUseCase {
     const orgWithSameSlug = await this.organizationRepo.findBySlug(slug._value)
 
     if (orgWithSameSlug) {
-      throw new SlugAlreadyExistsError()
+      return left(new SlugAlreadyExistsError())
     }
 
     const org = await this.organizationRepo.create(

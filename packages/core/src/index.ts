@@ -1,6 +1,6 @@
 export * from './application/either'
 export * from './application/repositories/organization-repo'
-export * from './application/use-cases/_errors/slug-already-exists-error'
+export * from './application/use-cases/_errors/user-already-exists-error'
 export * from './application/use-cases/create-organization'
 export * from './domain/entities/organization'
 export * from './domain/types/id'
