@@ -4,6 +4,7 @@ import type { Role } from '../types/role'
 import type { Email } from '../value-objects/email'
 
 export interface IInvite {
+  organizationId: Id
   name: string
   email: Email
   role: Role
@@ -13,6 +14,10 @@ export interface IInvite {
 export class Invite extends Entity<IInvite> {
   private constructor(state: IInvite, id?: Id) {
     super(state, id)
+  }
+
+  public get organizationId(): Id {
+    return this.state.organizationId
   }
 
   public get name(): string {
