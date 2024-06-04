@@ -4,26 +4,29 @@ import { Email } from '@/domain/value-objects/email'
 import { makeNewOrganization } from '@/tests/factories/make-new-organization'
 import { makeNewUser } from '@/tests/factories/make-new-user'
 import { InMemoryInviteRepo } from '@/tests/repositories/in-memory-invite-repo'
+import { InMemoryMemberRepo } from '@/tests/repositories/in-memory-member-repo'
 import { InMemoryOrganizationRepo } from '@/tests/repositories/in-memory-organization-repo'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 
 import { NotAllowedError } from './_errors/not-allowed-error'
-import { RevokeOrganizationInviteUseCase } from './revoke-organization-invite'
+import { AcceptInviteUseCase } from './accept-invite'
 
 let userRepo: InMemoryUserRepo
 let organizationRepo: InMemoryOrganizationRepo
+let memberRepo: InMemoryMemberRepo
 let inviteRepo: InMemoryInviteRepo
-let sut: RevokeOrganizationInviteUseCase
+let sut: AcceptInviteUseCase
 
-describe('Revoke Organization Invite Use case - unit tests', () => {
+describe('Accept Invite Use case - unit tests', () => {
   beforeEach(() => {
     userRepo = new InMemoryUserRepo()
     organizationRepo = new InMemoryOrganizationRepo()
+    memberRepo = new InMemoryMemberRepo()
     inviteRepo = new InMemoryInviteRepo()
-    sut = new RevokeOrganizationInviteUseCase(inviteRepo, organizationRepo)
+    sut = new AcceptInviteUseCase(inviteRepo, memberRepo, userRepo)
   })
 
-  it('should be able to revoke a pending invite as Admin', async () => {
+  it('should be able to accept a pending invite', async () => {
     const { newUser, newOrganization } = makeNewOrganization()
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
@@ -35,16 +38,19 @@ describe('Revoke Organization Invite Use case - unit tests', () => {
         role: 'MEMBER',
       }),
     )
+    const anotherUser = makeNewUser({ email: new Email('user1@test.com') })
+    userRepo.create(anotherUser)
     const result = await sut.execute({
-      userId: newUser.id.toString(),
+      userId: anotherUser.id.toString(),
       inviteId: inviteId.toString(),
       organizationId: newOrganization.id.toString(),
     })
+
     expect(result.isRight).toBeTruthy()
     expect(inviteRepo.items).toHaveLength(0)
   })
 
-  it('should not be able to revoke a pending invite as Member', async () => {
+  it('should not be able to accept a pending invite as a different user', async () => {
     const { newUser, newOrganization } = makeNewOrganization()
     userRepo.create(newUser)
 

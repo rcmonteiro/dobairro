@@ -24,10 +24,10 @@ describe('Create Invite Use case - unit tests', () => {
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
     const result = await sut.execute({
-      userId: newUser.id,
+      userId: newUser.id.toString(),
       name: newUser.name,
       email: newUser.email.value,
-      organizationId: newOrganization.id,
+      organizationId: newOrganization.id.toString(),
       role: 'ADMIN',
     })
 
@@ -40,17 +40,17 @@ describe('Create Invite Use case - unit tests', () => {
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
     await sut.execute({
-      userId: newUser.id,
+      userId: newUser.id.toString(),
       name: newUser.name,
       email: newUser.email.value,
-      organizationId: newOrganization.id,
+      organizationId: newOrganization.id.toString(),
       role: 'ADMIN',
     })
     const result = await sut.execute({
-      userId: newUser.id,
+      userId: newUser.id.toString(),
       name: newUser.name,
       email: newUser.email.value,
-      organizationId: newOrganization.id,
+      organizationId: newOrganization.id.toString(),
       role: 'MEMBER',
     })
 

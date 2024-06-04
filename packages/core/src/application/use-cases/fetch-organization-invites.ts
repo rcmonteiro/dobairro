@@ -1,5 +1,4 @@
 import { Invite } from '@/domain/entities/invite'
-import type { Id } from '@/domain/types/id'
 
 import { type Either, left, right } from '../either'
 import type { InviteRepo } from '../repositories/invite-repo'
@@ -8,8 +7,8 @@ import { getUserPermissions } from '../shared/get-user-permissions'
 import { NotAllowedError } from './_errors/not-allowed-error'
 
 interface FetchOrganizationInvitesUseCaseRequest {
-  userId: Id
-  organizationId: Id
+  userId: string
+  organizationId: string
 }
 
 type FetchOrganizationInvitesUseCaseResponse = Either<

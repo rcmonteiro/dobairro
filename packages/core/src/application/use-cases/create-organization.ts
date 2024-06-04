@@ -1,14 +1,14 @@
 import { Organization } from '@/domain/entities/organization'
 import { Theme } from '@/domain/entities/theme'
-import type { Id } from '@/domain/types/id'
+import { Id } from '@/domain/types/id'
 import { Slug } from '@/domain/value-objects/slug'
 
-import { left, right, type Either } from '../either'
+import { type Either, left, right } from '../either'
 import type { OrganizationRepo } from '../repositories/organization-repo'
 import { SlugAlreadyExistsError } from './_errors/slug-already-exists-error'
 
 interface CreateOrganizationUseCaseRequest {
-  ownerId: Id
+  ownerId: string
   name: string
 }
 
@@ -33,7 +33,7 @@ export class CreateOrganizationUseCase {
     }
 
     const newOrg = Organization.create({
-      ownerId: dto.ownerId,
+      ownerId: new Id(dto.ownerId),
       name: dto.name,
       theme: Theme.create({
         name: 'default',

@@ -1,6 +1,6 @@
 import type { InviteRepo } from '@/application/repositories/invite-repo'
 import type { Invite } from '@/domain/entities/invite'
-import type { Id } from '@/domain/types/id'
+import { Id } from '@/domain/types/id'
 
 export class InMemoryInviteRepo implements InviteRepo {
   public items: Invite[] = []
@@ -16,29 +16,31 @@ export class InMemoryInviteRepo implements InviteRepo {
 
   public async findByEmail(
     email: string,
-    organizationId: Id,
+    organizationId: string,
   ): Promise<Invite | null> {
     const invite = this.items.find(
       (item) =>
-        item.email.isEqual(email) && item.organizationId.equals(organizationId),
+        item.email.isEqual(email) &&
+        item.organizationId.equals(new Id(organizationId)),
     )
     return invite ?? null
   }
 
   public async findById(
-    inviteId: Id,
-    organizationId: Id,
+    inviteId: string,
+    organizationId: string,
   ): Promise<Invite | null> {
     const invite = this.items.find(
       (item) =>
-        item.organizationId.equals(organizationId) && item.id.equals(inviteId),
+        item.organizationId.equals(new Id(organizationId)) &&
+        item.id.equals(new Id(inviteId)),
     )
     return invite ?? null
   }
 
-  public async findManyByOrg(organizationId: Id): Promise<Invite[]> {
+  public async findManyByOrg(organizationId: string): Promise<Invite[]> {
     const invites = this.items.filter((item) =>
-      item.organizationId.equals(organizationId),
+      item.organizationId.equals(new Id(organizationId)),
     )
     return invites
   }

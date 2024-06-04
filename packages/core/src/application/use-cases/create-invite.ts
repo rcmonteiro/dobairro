@@ -1,5 +1,5 @@
 import { Invite } from '@/domain/entities/invite'
-import type { Id } from '@/domain/types/id'
+import { Id } from '@/domain/types/id'
 import type { Role } from '@/domain/types/role'
 import { Email } from '@/domain/value-objects/email'
 
@@ -11,8 +11,8 @@ import { NotAllowedError } from './_errors/not-allowed-error'
 import { ResourceAlreadyExistsError } from './_errors/resource-already-exists-error'
 
 interface CreateInviteUseCaseRequest {
-  userId: Id
-  organizationId: Id
+  userId: string
+  organizationId: string
   name: string
   email: string
   role: Role
@@ -62,7 +62,7 @@ export class CreateInviteUseCase {
     }
 
     const newInvite = Invite.create({
-      organizationId: dto.organizationId,
+      organizationId: new Id(dto.organizationId),
       name: dto.name,
       email: new Email(dto.email),
       role: dto.role,

@@ -1,5 +1,3 @@
-import { Id } from '@/domain/types/id'
-
 import { type Either, left, right } from '../either'
 import type { InviteRepo } from '../repositories/invite-repo'
 import type { OrganizationRepo } from '../repositories/organization-repo'
@@ -8,9 +6,9 @@ import { NotAllowedError } from './_errors/not-allowed-error'
 import { ResourceNotFoundError } from './_errors/resource-not-found-error'
 
 interface RevokeOrganizationInviteUseCaseRequest {
-  userId: Id
-  inviteId: Id
-  organizationId: Id
+  userId: string
+  inviteId: string
+  organizationId: string
 }
 
 type RevokeOrganizationInviteUseCaseResponse = Either<
