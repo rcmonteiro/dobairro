@@ -3,7 +3,7 @@ import { InMemoryInviteRepo } from '@/tests/repositories/in-memory-invite-repo'
 import { InMemoryOrganizationRepo } from '@/tests/repositories/in-memory-organization-repo'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 
-import { ResourceAlreadyExistsError } from './_errors/user-already-exists-error copy'
+import { ResourceAlreadyExistsError } from './_errors/resource-already-exists-error'
 import { CreateInviteUseCase } from './create-invite'
 
 let userRepo: InMemoryUserRepo
@@ -16,7 +16,7 @@ describe('Create Invite Use case - unit tests', () => {
     userRepo = new InMemoryUserRepo()
     organizationRepo = new InMemoryOrganizationRepo()
     inviteRepo = new InMemoryInviteRepo()
-    sut = new CreateInviteUseCase(inviteRepo)
+    sut = new CreateInviteUseCase(inviteRepo, organizationRepo)
   })
 
   it('should be able to create a new invite', async () => {
@@ -24,6 +24,7 @@ describe('Create Invite Use case - unit tests', () => {
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
     const result = await sut.execute({
+      userId: newUser.id,
       name: newUser.name,
       email: newUser.email.value,
       organizationId: newOrganization.id,
@@ -39,12 +40,14 @@ describe('Create Invite Use case - unit tests', () => {
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
     await sut.execute({
+      userId: newUser.id,
       name: newUser.name,
       email: newUser.email.value,
       organizationId: newOrganization.id,
       role: 'ADMIN',
     })
     const result = await sut.execute({
+      userId: newUser.id,
       name: newUser.name,
       email: newUser.email.value,
       organizationId: newOrganization.id,

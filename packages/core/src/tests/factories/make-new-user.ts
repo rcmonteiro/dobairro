@@ -4,7 +4,7 @@ import { User } from '@/domain/entities/user'
 import { Address } from '@/domain/value-objects/address'
 import { Email } from '@/domain/value-objects/email'
 
-export const makeNewUser = () => {
+export const makeNewUser = (override: Partial<User> = {}) => {
   const newUser = User.create({
     name: faker.person.fullName(),
     email: new Email(faker.internet.email()),
@@ -15,6 +15,7 @@ export const makeNewUser = () => {
       faker.location.state(),
       faker.location.zipCode(),
     ),
+    ...override,
   })
   return newUser
 }

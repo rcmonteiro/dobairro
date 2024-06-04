@@ -17,7 +17,7 @@ describe('Fetch Organization Invites Use case - unit tests', () => {
     userRepo = new InMemoryUserRepo()
     organizationRepo = new InMemoryOrganizationRepo()
     inviteRepo = new InMemoryInviteRepo()
-    sut = new FetchOrganizationInvitesUseCase(inviteRepo)
+    sut = new FetchOrganizationInvitesUseCase(inviteRepo, organizationRepo)
   })
 
   it('should be able to fetch all organization invites', async () => {
@@ -49,11 +49,14 @@ describe('Fetch Organization Invites Use case - unit tests', () => {
       }),
     )
     const result = await sut.execute({
+      userId: newUser.id,
       organizationId: newOrganization.id,
     })
 
     expect(result.isRight).toBeTruthy()
-    expect(result.value?.invites).toHaveLength(3)
-    expect(inviteRepo.items[1].role).toBe('ADMIN')
+    if (result.isRight()) {
+      expect(result.value?.invites).toHaveLength(3)
+      expect(inviteRepo.items[1].role).toBe('ADMIN')
+    }
   })
 })

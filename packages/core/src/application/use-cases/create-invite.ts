@@ -5,9 +5,13 @@ import { Email } from '@/domain/value-objects/email'
 
 import { type Either, left, right } from '../either'
 import type { InviteRepo } from '../repositories/invite-repo'
-import { ResourceAlreadyExistsError } from './_errors/user-already-exists-error copy'
+import type { OrganizationRepo } from '../repositories/organization-repo'
+import { getUserPermissions } from '../shared/get-user-permissions'
+import { NotAllowedError } from './_errors/not-allowed-error'
+import { ResourceAlreadyExistsError } from './_errors/resource-already-exists-error'
 
 interface CreateInviteUseCaseRequest {
+  userId: Id
   organizationId: Id
   name: string
   email: string
@@ -15,18 +19,39 @@ interface CreateInviteUseCaseRequest {
 }
 
 type CreateInviteUseCaseResponse = Either<
-  ResourceAlreadyExistsError,
+  ResourceAlreadyExistsError | NotAllowedError,
   {
     invite: Invite
   }
 >
 
 export class CreateInviteUseCase {
-  constructor(private inviteRepo: InviteRepo) {}
+  constructor(
+    private inviteRepo: InviteRepo,
+    private organizationRepo: OrganizationRepo,
+  ) {}
 
   public async execute(
     dto: CreateInviteUseCaseRequest,
   ): Promise<CreateInviteUseCaseResponse> {
+    const membership = await this.organizationRepo.getMembership(
+      dto.userId,
+      dto.organizationId,
+    )
+
+    if (!membership) {
+      return left(new NotAllowedError())
+    }
+
+    const { cannot } = getUserPermissions(
+      dto.userId.toString(),
+      membership.role,
+    )
+
+    if (cannot('get', 'Invite')) {
+      return left(new NotAllowedError('Not allowed to revoke an invite'))
+    }
+
     const inviteWithSameEmail = await this.inviteRepo.findByEmail(
       dto.email,
       dto.organizationId,

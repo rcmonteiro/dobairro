@@ -10,6 +10,10 @@ export class InMemoryInviteRepo implements InviteRepo {
     return data
   }
 
+  public async delete(data: Invite): Promise<void> {
+    this.items = this.items.filter((item) => !item.id.equals(data.id))
+  }
+
   public async findByEmail(
     email: string,
     organizationId: Id,
@@ -17,6 +21,17 @@ export class InMemoryInviteRepo implements InviteRepo {
     const invite = this.items.find(
       (item) =>
         item.email.isEqual(email) && item.organizationId.equals(organizationId),
+    )
+    return invite ?? null
+  }
+
+  public async findById(
+    inviteId: Id,
+    organizationId: Id,
+  ): Promise<Invite | null> {
+    const invite = this.items.find(
+      (item) =>
+        item.organizationId.equals(organizationId) && item.id.equals(inviteId),
     )
     return invite ?? null
   }

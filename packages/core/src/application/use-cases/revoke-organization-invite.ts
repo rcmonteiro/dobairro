@@ -1,33 +1,32 @@
-import { Invite } from '@/domain/entities/invite'
-import type { Id } from '@/domain/types/id'
+import { Id } from '@/domain/types/id'
 
 import { type Either, left, right } from '../either'
 import type { InviteRepo } from '../repositories/invite-repo'
 import type { OrganizationRepo } from '../repositories/organization-repo'
 import { getUserPermissions } from '../shared/get-user-permissions'
 import { NotAllowedError } from './_errors/not-allowed-error'
+import { ResourceNotFoundError } from './_errors/resource-not-found-error'
 
-interface FetchOrganizationInvitesUseCaseRequest {
+interface RevokeOrganizationInviteUseCaseRequest {
   userId: Id
+  inviteId: Id
   organizationId: Id
 }
 
-type FetchOrganizationInvitesUseCaseResponse = Either<
-  NotAllowedError,
-  {
-    invites: Invite[]
-  }
+type RevokeOrganizationInviteUseCaseResponse = Either<
+  ResourceNotFoundError,
+  null
 >
 
-export class FetchOrganizationInvitesUseCase {
+export class RevokeOrganizationInviteUseCase {
   constructor(
     private inviteRepo: InviteRepo,
     private organizationRepo: OrganizationRepo,
   ) {}
 
   public async execute(
-    dto: FetchOrganizationInvitesUseCaseRequest,
-  ): Promise<FetchOrganizationInvitesUseCaseResponse> {
+    dto: RevokeOrganizationInviteUseCaseRequest,
+  ): Promise<RevokeOrganizationInviteUseCaseResponse> {
     const membership = await this.organizationRepo.getMembership(
       dto.userId,
       dto.organizationId,
@@ -46,8 +45,17 @@ export class FetchOrganizationInvitesUseCase {
       return left(new NotAllowedError('Not allowed to revoke an invite'))
     }
 
-    const invites = await this.inviteRepo.findManyByOrg(dto.organizationId)
+    const invite = await this.inviteRepo.findById(
+      dto.inviteId,
+      dto.organizationId,
+    )
 
-    return right({ invites })
+    if (!invite) {
+      return left(new ResourceNotFoundError())
+    }
+
+    this.inviteRepo.delete(invite)
+
+    return right(null)
   }
 }
