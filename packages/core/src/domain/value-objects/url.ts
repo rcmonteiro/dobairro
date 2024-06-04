@@ -1,6 +1,6 @@
-import { TextValidator } from '@dobairro/core'
+import { TextValidator } from '@/utils/text-validator'
 
-import { ValueObject } from '@dobairro/core/src/domain/types/value-object'
+import { ValueObject } from '../types/value-object'
 
 export class Url extends ValueObject<string> {
   private _value: string

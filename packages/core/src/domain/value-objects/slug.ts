@@ -1,4 +1,4 @@
-import { ValueObject } from '@dobairro/core/src/domain/types/value-object'
+import { ValueObject } from '../types/value-object'
 
 export class Slug extends ValueObject<string> {
   public _value: string

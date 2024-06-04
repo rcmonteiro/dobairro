@@ -23,5 +23,8 @@
     "extends": [
       "@dobairro/eslint-config/node"
     ]
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
   }
 }
