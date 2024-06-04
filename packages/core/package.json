@@ -1,5 +1,6 @@
 {
   "name": "@dobairro/core",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",

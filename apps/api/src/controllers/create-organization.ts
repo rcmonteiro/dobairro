@@ -1,4 +1,4 @@
-import { SlugAlreadyExistsError } from '@dobairro/core'
+import { SlugAlreadyExistsError } from '@dobairro/core/src/application/use-cases/_errors/slug-already-exists-error'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
