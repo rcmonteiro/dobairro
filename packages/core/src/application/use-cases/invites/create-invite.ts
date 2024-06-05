@@ -3,12 +3,12 @@ import { Id } from '@/domain/types/id'
 import type { Role } from '@/domain/types/role'
 import { Email } from '@/domain/value-objects/email'
 
-import { type Either, left, right } from '../either'
-import type { InviteRepo } from '../repositories/invite-repo'
-import type { OrganizationRepo } from '../repositories/organization-repo'
-import { getUserPermissions } from '../shared/get-user-permissions'
-import { NotAllowedError } from './_errors/not-allowed-error'
-import { ResourceAlreadyExistsError } from './_errors/resource-already-exists-error'
+import { type Either, left, right } from '../../either'
+import type { InviteRepo } from '../../repositories/invite-repo'
+import type { OrganizationRepo } from '../../repositories/organization-repo'
+import { getUserPermissions } from '../../shared/get-user-permissions'
+import { NotAllowedError } from '../_errors/not-allowed-error'
+import { ResourceAlreadyExistsError } from '../_errors/resource-already-exists-error'
 
 interface CreateInviteUseCaseRequest {
   userId: string

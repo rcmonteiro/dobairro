@@ -1,12 +1,12 @@
 import { Member } from '@/domain/entities/member'
 import { Id } from '@/domain/types/id'
 
-import { type Either, left, right } from '../either'
-import type { InviteRepo } from '../repositories/invite-repo'
-import type { MemberRepo } from '../repositories/member-repo'
-import type { UserRepo } from '../repositories/user-repo'
-import { NotAllowedError } from './_errors/not-allowed-error'
-import { ResourceNotFoundError } from './_errors/resource-not-found-error'
+import { type Either, left, right } from '../../either'
+import type { InviteRepo } from '../../repositories/invite-repo'
+import type { MemberRepo } from '../../repositories/member-repo'
+import type { UserRepo } from '../../repositories/user-repo'
+import { NotAllowedError } from '../_errors/not-allowed-error'
+import { ResourceNotFoundError } from '../_errors/resource-not-found-error'
 
 interface AcceptInviteUseCaseRequest {
   userId: string

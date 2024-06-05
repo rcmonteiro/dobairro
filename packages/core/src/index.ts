@@ -7,8 +7,8 @@ export * from './application/repositories/user-repo'
 
 // Use cases
 export * from './application/use-cases/_errors/user-already-exists-error'
-export * from './application/use-cases/create-category'
-export * from './application/use-cases/create-organization'
+export * from './application/use-cases/categories/create-category'
+export * from './application/use-cases/organizations/create-organization'
 
 // Entities
 export * from './domain/entities/category'
@@ -22,3 +22,4 @@ export * from './domain/value-objects/slug'
 // Shared
 export * from './application/either'
 export * from './utils/text-validator'
+

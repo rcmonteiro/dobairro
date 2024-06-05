@@ -1,10 +1,10 @@
 import { Invite } from '@/domain/entities/invite'
 
-import { type Either, left, right } from '../either'
-import type { InviteRepo } from '../repositories/invite-repo'
-import type { OrganizationRepo } from '../repositories/organization-repo'
-import { getUserPermissions } from '../shared/get-user-permissions'
-import { NotAllowedError } from './_errors/not-allowed-error'
+import { type Either, left, right } from '../../either'
+import type { InviteRepo } from '../../repositories/invite-repo'
+import type { OrganizationRepo } from '../../repositories/organization-repo'
+import { getUserPermissions } from '../../shared/get-user-permissions'
+import { NotAllowedError } from '../_errors/not-allowed-error'
 
 interface FetchOrganizationInvitesUseCaseRequest {
   userId: string

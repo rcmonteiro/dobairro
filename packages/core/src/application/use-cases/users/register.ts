@@ -2,9 +2,9 @@ import { User } from '@/domain/entities/user'
 import { Address } from '@/domain/value-objects/address'
 import { Email } from '@/domain/value-objects/email'
 
-import { type Either, left, right } from '../either'
-import type { UserRepo } from '../repositories/user-repo'
-import { UserAlreadyExistsError } from './_errors/user-already-exists-error'
+import { type Either, left, right } from '../../either'
+import type { UserRepo } from '../../repositories/user-repo'
+import { UserAlreadyExistsError } from '../_errors/user-already-exists-error'
 
 interface RegisterUseCaseRequest {
   name: string

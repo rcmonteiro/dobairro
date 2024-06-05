@@ -3,7 +3,7 @@ import { InMemoryCategoryRepo } from '@/tests/repositories/in-memory-category-re
 import { InMemoryOrganizationRepo } from '@/tests/repositories/in-memory-organization-repo'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 
-import { ResourceAlreadyExistsError } from './_errors/resource-already-exists-error'
+import { ResourceAlreadyExistsError } from '../_errors/resource-already-exists-error'
 import { CreateCategoryUseCase } from './create-category'
 
 let userRepo: InMemoryUserRepo

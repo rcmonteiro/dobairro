@@ -1,9 +1,9 @@
-import { type Either, left, right } from '../either'
-import type { InviteRepo } from '../repositories/invite-repo'
-import type { OrganizationRepo } from '../repositories/organization-repo'
-import { getUserPermissions } from '../shared/get-user-permissions'
-import { NotAllowedError } from './_errors/not-allowed-error'
-import { ResourceNotFoundError } from './_errors/resource-not-found-error'
+import { type Either, left, right } from '../../either'
+import type { InviteRepo } from '../../repositories/invite-repo'
+import type { OrganizationRepo } from '../../repositories/organization-repo'
+import { getUserPermissions } from '../../shared/get-user-permissions'
+import { NotAllowedError } from '../_errors/not-allowed-error'
+import { ResourceNotFoundError } from '../_errors/resource-not-found-error'
 
 interface RevokeOrganizationInviteUseCaseRequest {
   userId: string

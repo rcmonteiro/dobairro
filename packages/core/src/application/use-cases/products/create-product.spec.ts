@@ -1,57 +1,51 @@
 import { makeNewOrganization } from '@/tests/factories/make-new-organization'
-import { InMemoryInviteRepo } from '@/tests/repositories/in-memory-invite-repo'
+import { InMemoryCategoryRepo } from '@/tests/repositories/in-memory-category-repo'
 import { InMemoryOrganizationRepo } from '@/tests/repositories/in-memory-organization-repo'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 
-import { ResourceAlreadyExistsError } from './_errors/resource-already-exists-error'
-import { CreateInviteUseCase } from './create-invite'
+import { ResourceAlreadyExistsError } from '../_errors/resource-already-exists-error'
+import { CreateCategoryUseCase } from '../categories/create-category'
 
 let userRepo: InMemoryUserRepo
 let organizationRepo: InMemoryOrganizationRepo
-let inviteRepo: InMemoryInviteRepo
-let sut: CreateInviteUseCase
+let categoryRepo: InMemoryCategoryRepo
+let sut: CreateCategoryUseCase
 
-describe('Create Invite Use case - unit tests', () => {
+describe('Create Category Use case - unit tests', () => {
   beforeEach(() => {
     userRepo = new InMemoryUserRepo()
     organizationRepo = new InMemoryOrganizationRepo()
-    inviteRepo = new InMemoryInviteRepo()
-    sut = new CreateInviteUseCase(inviteRepo, organizationRepo)
+    categoryRepo = new InMemoryCategoryRepo()
+    sut = new CreateCategoryUseCase(categoryRepo, organizationRepo)
   })
 
-  it('should be able to create a new invite', async () => {
+  it('should be able to create a new category', async () => {
     const { newUser, newOrganization } = makeNewOrganization()
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
     const result = await sut.execute({
       userId: newUser.id.toString(),
-      name: newUser.name,
-      email: newUser.email.value,
       organizationId: newOrganization.id.toString(),
-      role: 'ADMIN',
+      title: 'Category A',
     })
 
     expect(result.isRight).toBeTruthy()
-    expect(inviteRepo.items[0].role).toBe('ADMIN')
+    expect(categoryRepo.items[0].slug._value).toBe('category-a')
   })
 
-  it('should not be able to create a invite with the same e-mail', async () => {
+  it('should not be able to create a category with the same name', async () => {
     const { newUser, newOrganization } = makeNewOrganization()
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
     await sut.execute({
       userId: newUser.id.toString(),
-      name: newUser.name,
-      email: newUser.email.value,
       organizationId: newOrganization.id.toString(),
-      role: 'ADMIN',
+      title: 'Category A',
     })
     const result = await sut.execute({
       userId: newUser.id.toString(),
-      name: newUser.name,
-      email: newUser.email.value,
       organizationId: newOrganization.id.toString(),
-      role: 'MEMBER',
+      title: 'Category A',
     })
 
     expect(result.isLeft).toBeTruthy()

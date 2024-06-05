@@ -3,9 +3,9 @@ import { Theme } from '@/domain/entities/theme'
 import { Id } from '@/domain/types/id'
 import { Slug } from '@/domain/value-objects/slug'
 
-import { type Either, left, right } from '../either'
-import type { OrganizationRepo } from '../repositories/organization-repo'
-import { SlugAlreadyExistsError } from './_errors/slug-already-exists-error'
+import { type Either, left, right } from '../../either'
+import type { OrganizationRepo } from '../../repositories/organization-repo'
+import { SlugAlreadyExistsError } from '../_errors/slug-already-exists-error'
 
 interface CreateOrganizationUseCaseRequest {
   ownerId: string

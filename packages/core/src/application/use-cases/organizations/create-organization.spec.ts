@@ -2,7 +2,7 @@ import { makeNewUser } from '@/tests/factories/make-new-user'
 import { InMemoryOrganizationRepo } from '@/tests/repositories/in-memory-organization-repo'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 
-import { SlugAlreadyExistsError } from './_errors/slug-already-exists-error'
+import { SlugAlreadyExistsError } from '../_errors/slug-already-exists-error'
 import { CreateOrganizationUseCase } from './create-organization'
 
 let userRepo: InMemoryUserRepo

@@ -7,7 +7,7 @@ import { InMemoryInviteRepo } from '@/tests/repositories/in-memory-invite-repo'
 import { InMemoryOrganizationRepo } from '@/tests/repositories/in-memory-organization-repo'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 
-import { NotAllowedError } from './_errors/not-allowed-error'
+import { NotAllowedError } from '../_errors/not-allowed-error'
 import { RejectInviteUseCase } from './reject-invite'
 
 let userRepo: InMemoryUserRepo

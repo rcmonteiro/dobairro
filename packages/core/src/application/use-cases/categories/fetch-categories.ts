@@ -1,10 +1,10 @@
 import { Category } from '@/domain/entities/category'
 
-import { type Either, left, right } from '../either'
-import type { CategoryRepo } from '../repositories/category-repo'
-import type { OrganizationRepo } from '../repositories/organization-repo'
-import { getUserPermissions } from '../shared/get-user-permissions'
-import { NotAllowedError } from './_errors/not-allowed-error'
+import { type Either, left, right } from '../../either'
+import type { CategoryRepo } from '../../repositories/category-repo'
+import type { OrganizationRepo } from '../../repositories/organization-repo'
+import { getUserPermissions } from '../../shared/get-user-permissions'
+import { NotAllowedError } from '../_errors/not-allowed-error'
 
 interface FetchCategoriesUseCaseRequest {
   userId: string
