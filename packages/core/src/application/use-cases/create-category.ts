@@ -1,43 +1,42 @@
-import { Invite } from '@/domain/entities/invite'
+import { Category } from '@/domain/entities/category'
 import { Id } from '@/domain/types/id'
-import type { Role } from '@/domain/types/role'
-import { Email } from '@/domain/value-objects/email'
+import { Slug } from '@/domain/value-objects/slug'
 
 import { type Either, left, right } from '../either'
-import type { InviteRepo } from '../repositories/invite-repo'
+import type { CategoryRepo } from '../repositories/category-repo'
 import type { OrganizationRepo } from '../repositories/organization-repo'
 import { getUserPermissions } from '../shared/get-user-permissions'
 import { NotAllowedError } from './_errors/not-allowed-error'
 import { ResourceAlreadyExistsError } from './_errors/resource-already-exists-error'
 
-interface CreateInviteUseCaseRequest {
+interface CreateCategoryUseCaseRequest {
   userId: string
   organizationId: string
-  name: string
-  email: string
-  role: Role
+  title: string
 }
 
-type CreateInviteUseCaseResponse = Either<
+type CreateCategoryUseCaseResponse = Either<
   ResourceAlreadyExistsError | NotAllowedError,
   {
-    invite: Invite
+    category: Category
   }
 >
 
-export class CreateInviteUseCase {
+export class CreateCategoryUseCase {
   constructor(
-    private inviteRepo: InviteRepo,
+    private categoryRepo: CategoryRepo,
     private organizationRepo: OrganizationRepo,
   ) {}
 
   public async execute(
-    dto: CreateInviteUseCaseRequest,
-  ): Promise<CreateInviteUseCaseResponse> {
+    dto: CreateCategoryUseCaseRequest,
+  ): Promise<CreateCategoryUseCaseResponse> {
     const membership = await this.organizationRepo.getMembership(
       dto.userId,
       dto.organizationId,
     )
+
+    const slug = Slug.createFromText(dto.title)
 
     if (!membership) {
       return left(new NotAllowedError())
@@ -48,28 +47,27 @@ export class CreateInviteUseCase {
       membership.role,
     )
 
-    if (cannot('create', 'Invite')) {
-      return left(new NotAllowedError('Not allowed to revoke an invite'))
+    if (cannot('create', 'Category')) {
+      return left(new NotAllowedError('Not allowed to create a category'))
     }
 
-    const inviteWithSameEmail = await this.inviteRepo.findByEmail(
-      dto.email,
+    const categoryWithSameSlug = await this.categoryRepo.findBySlug(
+      slug._value,
       dto.organizationId,
     )
 
-    if (inviteWithSameEmail) {
+    if (categoryWithSameSlug) {
       return left(new ResourceAlreadyExistsError())
     }
 
-    const newInvite = Invite.create({
+    const newCategory = Category.create({
       organizationId: new Id(dto.organizationId),
-      name: dto.name,
-      email: new Email(dto.email),
-      role: dto.role,
+      title: dto.title,
+      slug,
     })
 
-    const invite = await this.inviteRepo.create(newInvite)
+    const category = await this.categoryRepo.create(newCategory)
 
-    return right({ invite })
+    return right({ category })
   }
 }

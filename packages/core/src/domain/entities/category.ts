@@ -3,6 +3,7 @@ import type { Id } from '../types/id'
 import type { Slug } from '../value-objects/slug'
 
 export interface ICategory {
+  organizationId: Id
   title: string
   slug: Slug
   createdAt?: Date
@@ -12,6 +13,10 @@ export interface ICategory {
 export class Category extends Entity<ICategory> {
   private constructor(state: ICategory, id?: Id) {
     super(state, id)
+  }
+
+  public get organizationId(): Id {
+    return this.state.organizationId
   }
 
   public get title(): string {
