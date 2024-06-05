@@ -37,7 +37,7 @@ describe('Create Category Use case - unit tests', () => {
     const { newUser, newOrganization } = makeNewOrganization()
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
-    await await sut.execute({
+    await sut.execute({
       userId: newUser.id.toString(),
       organizationId: newOrganization.id.toString(),
       title: 'Category A',
