@@ -1,6 +1,6 @@
 {
   "extends": "@dobairro/tsconfig/node.json",
-  "include": ["src/**/*", "@types/**/*", "../domain/src/tests"],
+  "include": ["src/**/*", "@types/**/*"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

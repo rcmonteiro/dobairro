@@ -2,12 +2,11 @@ import { Entity } from '../types/entity'
 import type { Id } from '../types/id'
 import { Slug } from '../value-objects/slug'
 import { Member } from './member'
-import type { Theme } from './theme'
 
 export interface IOrganization {
   ownerId: Id
+  themeId: Id
   name: string
-  theme: Theme
   slug: Slug
   members?: Member[]
   createdAt?: Date
@@ -38,8 +37,8 @@ export class Organization extends Entity<IOrganization> {
     return this.state.name
   }
 
-  public get theme(): Theme {
-    return this.state.theme
+  public get themeId(): Id {
+    return this.state.themeId
   }
 
   public get members(): Member[] {

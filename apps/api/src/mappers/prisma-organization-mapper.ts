@@ -9,19 +9,24 @@ export class PrismaOrganizationMapper {
       id: organization.id.toString(),
       ownerId: organization.ownerId.toString(),
       name: organization.name,
+      themeId: organization.themeId.toString(),
       slug: organization.slug._value,
-      avatarUrl: organization.avatarUrl,
       createdAt: organization.createdAt,
       updatedAt: organization.updatedAt,
     }
   }
 
   static toDomain(raw: PrismaOrganization): Organization {
-    return Organization.create({
-      ownerId: new Id(raw.ownerId),
-      name: raw.name,
-      avatarUrl: raw.avatarUrl ?? '',
-      slug: Slug.create(raw.slug),
-    })
+    return Organization.create(
+      {
+        ownerId: new Id(raw.ownerId),
+        name: raw.name,
+        themeId: new Id(raw.themeId),
+        slug: Slug.create(raw.slug),
+        createdAt: raw.createdAt,
+        updatedAt: raw.updatedAt,
+      },
+      new Id(raw.id),
+    )
   }
 }

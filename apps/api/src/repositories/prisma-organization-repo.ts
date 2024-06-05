@@ -1,6 +1,8 @@
 import type { Organization, OrganizationRepo } from '@dobairro/core'
+import type { Member } from '@dobairro/core/src/domain/entities/member'
 
 import { db } from '@/lib/prisma'
+import { PrismaMemberMapper } from '@/mappers/prisma-member-mapper'
 import { PrismaOrganizationMapper } from '@/mappers/prisma-organization-mapper'
 
 export class PrismaOrganizationRepo implements OrganizationRepo {
@@ -24,5 +26,35 @@ export class PrismaOrganizationRepo implements OrganizationRepo {
     }
 
     return PrismaOrganizationMapper.toDomain(organization)
+  }
+
+  public async getMembership(
+    userId: string,
+    organizationId: string,
+  ): Promise<Member | null> {
+    const org = await db.organization.findUnique({
+      where: {
+        id: organizationId,
+      },
+    })
+
+    if (!org) {
+      return null
+    }
+
+    const member = await db.member.findUnique({
+      where: {
+        organizationId_userId: {
+          organizationId,
+          userId,
+        },
+      },
+    })
+
+    if (!member) {
+      return null
+    }
+
+    return PrismaMemberMapper.toDomain(member)
   }
 }

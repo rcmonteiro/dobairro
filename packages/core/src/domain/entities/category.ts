@@ -6,8 +6,6 @@ export interface ICategory {
   organizationId: Id
   title: string
   slug: Slug
-  createdAt?: Date
-  updatedAt?: Date
 }
 
 export class Category extends Entity<ICategory> {
@@ -27,16 +25,7 @@ export class Category extends Entity<ICategory> {
     return this.state.slug
   }
 
-  public get createdAt(): Date | undefined {
-    return this.state.createdAt
-  }
-
-  public get updatedAt(): Date | undefined {
-    return this.state.updatedAt
-  }
-
   public static create(state: ICategory, id?: Id): Category {
-    state.createdAt = state.createdAt ?? new Date()
     return new Category(state, id)
   }
 }

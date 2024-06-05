@@ -22,6 +22,7 @@ model User {
   createdAt          DateTime       @default(now()) @map("created_at")
   updatedAt          DateTime       @updatedAt @map("updated_at")
   owns_organizations Organization[]
+  members            Member[]
 
   @@map("users")
 }
@@ -35,6 +36,51 @@ model Organization {
   updatedAt DateTime @updatedAt @map("updated_at")
   owner     User     @relation(fields: [ownerId], references: [id])
   ownerId   String   @map("owner_id")
+  members   Member[]
+
+  theme    Theme      @relation(fields: [themeId], references: [id])
+  themeId  String     @map("theme_id")
+  Category Category[]
 
   @@map("organizations")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+model Member {
+  id        String   @id @default(uuid())
+  role      Role
+  createdAt DateTime @default(now()) @map("created_at")
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @map("organization_id")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  @@unique([organizationId, userId])
+  @@map("members")
+}
+
+model Theme {
+  id            String         @id @default(uuid())
+  name          String
+  colors        String[]
+  organizations Organization[]
+
+  @@map("themes")
+}
+
+model Category {
+  id    String @id @default(uuid())
+  title String
+  slug  String @unique
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @map("organization_id")
+
+  @@map("categories")
 }
