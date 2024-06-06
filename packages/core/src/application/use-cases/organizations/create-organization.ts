@@ -1,5 +1,4 @@
 import { Organization } from '@/domain/entities/organization'
-import { Theme } from '@/domain/entities/theme'
 import { Id } from '@/domain/types/id'
 import { Slug } from '@/domain/value-objects/slug'
 
@@ -35,10 +34,6 @@ export class CreateOrganizationUseCase {
     const newOrg = Organization.create({
       ownerId: new Id(dto.ownerId),
       name: dto.name,
-      theme: Theme.create({
-        name: 'default',
-        colors: ['#3E7E6C', '#FCBD18', '#F6F5F2'],
-      }),
       slug,
     })
 

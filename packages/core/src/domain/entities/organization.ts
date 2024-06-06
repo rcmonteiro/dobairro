@@ -5,9 +5,9 @@ import { Member } from './member'
 
 export interface IOrganization {
   ownerId: Id
-  themeId: Id
   name: string
   slug: Slug
+  themeId?: Id
   members?: Member[]
   createdAt?: Date
   updatedAt?: Date
@@ -37,7 +37,7 @@ export class Organization extends Entity<IOrganization> {
     return this.state.name
   }
 
-  public get themeId(): Id {
+  public get themeId(): Id | undefined {
     return this.state.themeId
   }
 

@@ -21,7 +21,7 @@ describe('Create Organization Use case - unit tests', () => {
     userRepo.create(newUser)
     const result = await sut.execute({
       name: 'Cakes from Doe',
-      ownerId: newUser.id,
+      ownerId: newUser.id.toString(),
     })
 
     expect(result.isRight).toBeTruthy()
@@ -34,11 +34,11 @@ describe('Create Organization Use case - unit tests', () => {
     userRepo.create(newUser)
     await sut.execute({
       name: 'Cakes from Doe',
-      ownerId: newUser.id,
+      ownerId: newUser.id.toString(),
     })
     const result = await sut.execute({
       name: 'Cakes from Doe',
-      ownerId: newUser.id,
+      ownerId: newUser.id.toString(),
     })
 
     expect(result.isLeft).toBeTruthy()
