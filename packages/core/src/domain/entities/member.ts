@@ -26,6 +26,10 @@ export class Member extends Entity<IMember> {
     return this.state.role
   }
 
+  public set role(role: Role) {
+    this.state.role = role
+  }
+
   public get createdAt(): Date | undefined {
     return this.state.createdAt
   }
