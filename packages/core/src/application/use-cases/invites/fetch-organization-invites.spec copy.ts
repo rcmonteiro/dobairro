@@ -5,7 +5,7 @@ import { InMemoryInviteRepo } from '@/tests/repositories/in-memory-invite-repo'
 import { InMemoryOrganizationRepo } from '@/tests/repositories/in-memory-organization-repo'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 
-import { FetchOrganizationInvitesUseCase } from './fetch-organization-invites'
+import { FetchOrganizationInvitesUseCase } from './fetch-user-invites'
 
 let userRepo: InMemoryUserRepo
 let organizationRepo: InMemoryOrganizationRepo
@@ -49,8 +49,8 @@ describe('Fetch Organization Invites Use case - unit tests', () => {
       }),
     )
     const result = await sut.execute({
-      userId: newUser.id,
-      organizationId: newOrganization.id,
+      userId: newUser.id.toString(),
+      organizationId: newOrganization.id.toString(),
     })
 
     expect(result.isRight).toBeTruthy()
