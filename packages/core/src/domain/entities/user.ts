@@ -1,7 +1,7 @@
 import { Entity } from '../types/entity'
 import type { Id } from '../types/id'
-import type { Address } from '../value-objects/address'
-import type { Email } from '../value-objects/email'
+import { Address, IAddress } from '../value-objects/address'
+import { Email } from '../value-objects/email'
 
 export interface IUser {
   name: string
@@ -21,12 +21,30 @@ export class User extends Entity<IUser> {
     return this.state.name
   }
 
+  public set name(name: string) {
+    this.state.name = name
+  }
+
   public get email(): Email {
     return this.state.email
   }
 
+  public set email(email: string) {
+    this.state.email = new Email(email)
+  }
+
   public get address(): Address {
     return this.state.address
+  }
+
+  public set address(address: IAddress) {
+    this.state.address = new Address(
+      address.street,
+      address.number,
+      address.city,
+      address.state,
+      address.zipCode,
+    )
   }
 
   public get createdAt(): Date | undefined {

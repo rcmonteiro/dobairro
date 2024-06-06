@@ -1,5 +1,6 @@
 import { Category } from '@/domain/entities/category'
 import { Id } from '@/domain/types/id'
+import type { Role } from '@/domain/types/role'
 import { Slug } from '@/domain/value-objects/slug'
 
 import { type Either, left, right } from '../../either'
@@ -12,6 +13,7 @@ import { ResourceAlreadyExistsError } from '../_errors/resource-already-exists-e
 interface CreateCategoryUseCaseRequest {
   userId: string
   organizationId: string
+  role: Role
   title: string
 }
 

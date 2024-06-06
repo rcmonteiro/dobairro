@@ -1,6 +1,6 @@
 import { ValueObject } from '../types/value-object'
 
-interface IAddress {
+export interface IAddress {
   street: string
   number: string
   city: string
