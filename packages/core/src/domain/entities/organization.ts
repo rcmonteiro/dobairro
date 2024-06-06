@@ -37,6 +37,10 @@ export class Organization extends Entity<IOrganization> {
     return this.state.name
   }
 
+  public set name(name: string) {
+    this.state.name = name
+  }
+
   public get themeId(): Id | undefined {
     return this.state.themeId
   }
