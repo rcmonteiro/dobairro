@@ -10,6 +10,12 @@ export class InMemoryMemberRepo implements MemberRepo {
     return data
   }
 
+  public async save(data: Member): Promise<Member> {
+    const index = this.items.findIndex((item) => item.id.equals(data.id))
+    this.items[index] = data
+    return data
+  }
+
   public async delete(data: Member): Promise<void> {
     const index = this.items.findIndex((item) => item.id.equals(data.id))
 
