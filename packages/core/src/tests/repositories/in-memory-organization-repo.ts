@@ -16,6 +16,13 @@ export class InMemoryOrganizationRepo implements OrganizationRepo {
     return organization ?? null
   }
 
+  public async findById(organizationId: string): Promise<Organization | null> {
+    const organization = this.items.find((item) =>
+      item.id.equals(new Id(organizationId)),
+    )
+    return organization ?? null
+  }
+
   public async getMembership(
     userId: string,
     organizationId: string,
