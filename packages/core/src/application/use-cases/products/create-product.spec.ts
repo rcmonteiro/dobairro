@@ -29,7 +29,7 @@ describe('Create Category Use case - unit tests', () => {
       title: 'Category A',
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     expect(categoryRepo.items[0].slug._value).toBe('category-a')
   })
 
@@ -48,7 +48,7 @@ describe('Create Category Use case - unit tests', () => {
       title: 'Category A',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(ResourceAlreadyExistsError)
   })
 })

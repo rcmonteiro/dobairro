@@ -23,7 +23,7 @@ describe('Register Use case - unit tests', () => {
       zipCode: '00000',
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     expect(userRepo.items[0].name).toBe('John Doe')
     expect(userRepo.items[0].address.zipCode).toBe('00000')
   })
@@ -48,7 +48,7 @@ describe('Register Use case - unit tests', () => {
       zipCode: '00000',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(UserAlreadyExistsError)
   })
 })

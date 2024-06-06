@@ -41,7 +41,7 @@ describe('Get Invite Use case - unit tests', () => {
       inviteId: newInvite.id.toString(),
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value.invite).toBeInstanceOf(Invite)
       expect(result.value.invite.name).toBe(newInvite.name)
@@ -68,7 +68,7 @@ describe('Get Invite Use case - unit tests', () => {
       inviteId: newInvite.id.toString(),
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

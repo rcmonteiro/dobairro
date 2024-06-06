@@ -27,6 +27,7 @@ describe('Fetch User Invites Use case - unit tests', () => {
       ownerId: orgData1.newUser.id,
     })
     const sutUser = makeNewUser({ email: new Email('user1@test.com') })
+    userRepo.create(sutUser)
     userRepo.create(orgData1.newUser)
     organizationRepo.create(orgData1.newOrganization)
     organizationRepo.create(orgData2.newOrganization)
@@ -51,7 +52,7 @@ describe('Fetch User Invites Use case - unit tests', () => {
       userId: sutUser.id.toString(),
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value?.invites).toHaveLength(2)
       expect(inviteRepo.items[1].role).toBe('ADMIN')

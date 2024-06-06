@@ -5,7 +5,7 @@ import { InMemoryInviteRepo } from '@/tests/repositories/in-memory-invite-repo'
 import { InMemoryOrganizationRepo } from '@/tests/repositories/in-memory-organization-repo'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 
-import { FetchOrganizationInvitesUseCase } from './fetch-user-invites'
+import { FetchOrganizationInvitesUseCase } from './fetch-organization-invites'
 
 let userRepo: InMemoryUserRepo
 let organizationRepo: InMemoryOrganizationRepo
@@ -53,7 +53,7 @@ describe('Fetch Organization Invites Use case - unit tests', () => {
       organizationId: newOrganization.id.toString(),
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value?.invites).toHaveLength(3)
       expect(inviteRepo.items[1].role).toBe('ADMIN')

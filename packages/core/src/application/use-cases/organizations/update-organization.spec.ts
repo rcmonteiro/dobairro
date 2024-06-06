@@ -24,7 +24,7 @@ describe('Update Organization Use case - unit tests', () => {
       name: 'Organization with new name',
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value.organization).toBeInstanceOf(Organization)
       expect(result.value.organization.name).toBe('Organization with new name')
@@ -45,7 +45,7 @@ describe('Update Organization Use case - unit tests', () => {
       name: 'Organization with new name',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

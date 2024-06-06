@@ -29,7 +29,7 @@ describe('Verify Magic Link Use case - unit tests', () => {
       token,
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value.user).toBeInstanceOf(User)
     }
@@ -40,7 +40,7 @@ describe('Verify Magic Link Use case - unit tests', () => {
       token: 'invalid-token',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

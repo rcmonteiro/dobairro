@@ -40,7 +40,7 @@ describe('Revoke Organization Invite Use case - unit tests', () => {
       inviteId: inviteId.toString(),
       organizationId: newOrganization.id.toString(),
     })
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     expect(inviteRepo.items).toHaveLength(0)
   })
 
@@ -73,7 +73,7 @@ describe('Revoke Organization Invite Use case - unit tests', () => {
       organizationId: newOrganization.id.toString(),
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(NotAllowedError)
     expect(inviteRepo.items).toHaveLength(1)
   })

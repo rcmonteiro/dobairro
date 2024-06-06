@@ -43,7 +43,7 @@ describe('Fetch Organization Categories Use case - unit tests', () => {
       organizationId: newOrganization.id.toString(),
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value.categories).toHaveLength(2)
       expect(result.value.categories[1].slug._value).toBe('category-b')

@@ -24,7 +24,7 @@ describe('Create Organization Use case - unit tests', () => {
       ownerId: newUser.id.toString(),
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     expect(organizationRepo.items[0].name).toBe('Cakes from Doe')
     expect(organizationRepo.items[0].members[0].role).toBe('ADMIN')
   })
@@ -41,7 +41,7 @@ describe('Create Organization Use case - unit tests', () => {
       ownerId: newUser.id.toString(),
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(SlugAlreadyExistsError)
   })
 })
