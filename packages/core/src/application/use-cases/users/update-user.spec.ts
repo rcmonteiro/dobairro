@@ -24,7 +24,7 @@ describe('Update User Use case - unit tests', () => {
       name: 'User with new name',
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value.user).toBeInstanceOf(User)
       expect(result.value.user.name).toBe('User with new name')
@@ -44,7 +44,7 @@ describe('Update User Use case - unit tests', () => {
       name: 'User with new name',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

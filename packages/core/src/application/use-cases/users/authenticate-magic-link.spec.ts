@@ -24,7 +24,7 @@ describe('Authenticate with Magic Link Use case - unit tests', () => {
       email: newUser.email.value,
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value.token).toBeDefined()
     }
@@ -35,7 +35,7 @@ describe('Authenticate with Magic Link Use case - unit tests', () => {
       email: 'john@example.com',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(ResourceNotFoundError)
   })
 })

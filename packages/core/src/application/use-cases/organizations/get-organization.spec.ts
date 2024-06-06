@@ -28,7 +28,7 @@ describe('Get Organization Use case - unit tests', () => {
       organizationId: newOrganization.id.toString(),
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value.organization).toBeInstanceOf(Organization)
       expect(result.value.organization.name).toBe(newOrganization.name)
@@ -43,7 +43,7 @@ describe('Get Organization Use case - unit tests', () => {
       organizationId: 'inexistent-organization-id',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

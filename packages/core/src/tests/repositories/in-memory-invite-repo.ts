@@ -3,6 +3,9 @@ import type { Invite } from '@/domain/entities/invite'
 import { Id } from '@/domain/types/id'
 
 export class InMemoryInviteRepo implements InviteRepo {
+  findManyById(userId: string): Promise<Invite[]> {
+    throw new Error('Method not implemented.')
+  }
   public items: Invite[] = []
 
   public async create(data: Invite): Promise<Invite> {
@@ -42,6 +45,11 @@ export class InMemoryInviteRepo implements InviteRepo {
     const invites = this.items.filter((item) =>
       item.organizationId.equals(new Id(organizationId)),
     )
+    return invites
+  }
+
+  public async findManyByEmail(email: string): Promise<Invite[]> {
+    const invites = this.items.filter((item) => item.email.isEqual(email))
     return invites
   }
 }

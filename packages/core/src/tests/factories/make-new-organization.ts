@@ -6,7 +6,7 @@ import { Slug } from '@/domain/value-objects/slug'
 
 import { makeNewUser } from './make-new-user'
 
-export const makeNewOrganization = () => {
+export const makeNewOrganization = (override: Partial<Organization> = {}) => {
   const newUser = makeNewUser()
   const orgName = faker.company.name()
   const newOrganization = Organization.create({
@@ -14,6 +14,7 @@ export const makeNewOrganization = () => {
     ownerId: newUser.id,
     themeId: new Id(),
     slug: Slug.createFromText(orgName),
+    ...override,
   })
   return { newUser, newOrganization }
 }

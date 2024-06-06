@@ -6,4 +6,5 @@ export interface InviteRepo {
   findByEmail(email: string, organizationId: string): Promise<Invite | null>
   findById(inviteId: string, organizationId: string): Promise<Invite | null>
   findManyByOrg(organizationId: string): Promise<Invite[]>
+  findManyByEmail(email: string): Promise<Invite[]>
 }

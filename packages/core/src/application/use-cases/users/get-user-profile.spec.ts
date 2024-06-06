@@ -22,7 +22,7 @@ describe('Get User Profile Use case - unit tests', () => {
       userId: newUser.id.toString(),
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
       expect(result.value.user).toBeInstanceOf(User)
       expect(result.value.user.id).toBe(newUser.id)
@@ -34,7 +34,7 @@ describe('Get User Profile Use case - unit tests', () => {
       userId: 'inexistent-user-id',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(ResourceNotFoundError)
   })
 })

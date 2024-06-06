@@ -31,7 +31,7 @@ describe('Create Invite Use case - unit tests', () => {
       role: 'ADMIN',
     })
 
-    expect(result.isRight).toBeTruthy()
+    expect(result.isRight()).toBeTruthy()
     expect(inviteRepo.items[0].role).toBe('ADMIN')
   })
 
@@ -54,7 +54,7 @@ describe('Create Invite Use case - unit tests', () => {
       role: 'MEMBER',
     })
 
-    expect(result.isLeft).toBeTruthy()
+    expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(ResourceAlreadyExistsError)
   })
 })

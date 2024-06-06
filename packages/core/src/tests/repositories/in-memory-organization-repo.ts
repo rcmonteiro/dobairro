@@ -11,6 +11,12 @@ export class InMemoryOrganizationRepo implements OrganizationRepo {
     return data
   }
 
+  public async save(data: Organization): Promise<Organization> {
+    const index = this.items.findIndex((item) => item.id.equals(data.id))
+    this.items[index] = data
+    return data
+  }
+
   public async findBySlug(slug: string): Promise<Organization | null> {
     const organization = this.items.find((item) => item?.slug?.isEqual(slug))
     return organization ?? null
