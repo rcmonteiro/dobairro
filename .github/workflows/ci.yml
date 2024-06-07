@@ -48,6 +48,12 @@ jobs:
  
       - name: Build
         run: pnpm build
+
+      - name: Set environment variables
+        run: |
+          echo "JWT_SECRET=$JWT_SECRET" >> $GITHUB_ENV
+          echo "API_URL=$API_URL" >> $GITHUB_ENV
+          echo "DB_URL=$DB_URL" >> $GITHUB_ENV
  
       - name: Test
         run: pnpm test
