@@ -1,13 +1,15 @@
 import { Entity } from '../types/entity'
 import type { Id } from '../types/id'
-import type { Category } from './category'
+import type { Slug } from '../value-objects/slug'
 
 export interface IProduct {
+  organizationId: Id
+  categoryId: Id
   title: string
+  slug: Slug
   description: string
-  category: Category
-  image: string
   price: number
+  image?: string
   createdAt?: Date
   updatedAt?: Date
 }
@@ -17,19 +19,27 @@ export class Product extends Entity<IProduct> {
     super(state, id)
   }
 
+  public get organizationId(): Id {
+    return this.state.organizationId
+  }
+
   public get title(): string {
     return this.state.title
+  }
+
+  public get slug(): Slug {
+    return this.state.slug
   }
 
   public get description(): string {
     return this.state.description
   }
 
-  public get category(): Category {
-    return this.state.category
+  public get categoryId(): Id {
+    return this.state.categoryId
   }
 
-  public get image(): string {
+  public get image(): string | undefined {
     return this.state.image
   }
 

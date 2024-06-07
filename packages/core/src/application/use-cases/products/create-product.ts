@@ -1,75 +1,80 @@
-import { Category } from '@/domain/entities/category'
+import { Product } from '@/domain/entities/product'
 import { Id } from '@/domain/types/id'
-import type { Role } from '@/domain/types/role'
 import { Slug } from '@/domain/value-objects/slug'
 
 import { type Either, left, right } from '../../either'
-import type { CategoryRepo } from '../../repositories/category-repo'
 import type { OrganizationRepo } from '../../repositories/organization-repo'
+import type { ProductRepo } from '../../repositories/product-repo'
 import { getUserPermissions } from '../../shared/get-user-permissions'
 import { NotAllowedError } from '../_errors/not-allowed-error'
 import { ResourceAlreadyExistsError } from '../_errors/resource-already-exists-error'
 
-interface CreateCategoryUseCaseRequest {
-  userId: string
+interface CreateProductUseCaseRequest {
+  authenticatedUserId: string
   organizationId: string
-  role: Role
   title: string
+  description: string
+  categoryId: string
+  image?: string
+  price: number
 }
 
-type CreateCategoryUseCaseResponse = Either<
+type CreateProductUseCaseResponse = Either<
   ResourceAlreadyExistsError | NotAllowedError,
   {
-    category: Category
+    product: Product
   }
 >
 
-export class CreateCategoryUseCase {
+export class CreateProductUseCase {
   constructor(
-    private categoryRepo: CategoryRepo,
+    private productRepo: ProductRepo,
     private organizationRepo: OrganizationRepo,
   ) {}
 
   public async execute(
-    dto: CreateCategoryUseCaseRequest,
-  ): Promise<CreateCategoryUseCaseResponse> {
+    dto: CreateProductUseCaseRequest,
+  ): Promise<CreateProductUseCaseResponse> {
     const membership = await this.organizationRepo.getMembership(
-      dto.userId,
+      dto.authenticatedUserId,
       dto.organizationId,
     )
-
-    const slug = Slug.createFromText(dto.title)
 
     if (!membership) {
       return left(new NotAllowedError())
     }
 
     const { cannot } = getUserPermissions(
-      dto.userId.toString(),
+      dto.authenticatedUserId.toString(),
       membership.role,
     )
 
-    if (cannot('create', 'Category')) {
-      return left(new NotAllowedError('Not allowed to create a category'))
+    if (cannot('create', 'Product')) {
+      return left(new NotAllowedError('Not allowed to create a product'))
     }
 
-    const categoryWithSameSlug = await this.categoryRepo.findBySlug(
+    const slug = Slug.createFromText(dto.title)
+
+    const productWithSameSlug = await this.productRepo.findBySlug(
       slug._value,
       dto.organizationId,
     )
 
-    if (categoryWithSameSlug) {
+    if (productWithSameSlug) {
       return left(new ResourceAlreadyExistsError())
     }
 
-    const newCategory = Category.create({
+    const newProduct = Product.create({
       organizationId: new Id(dto.organizationId),
       title: dto.title,
       slug,
+      description: dto.description,
+      categoryId: new Id(dto.categoryId),
+      price: dto.price,
     })
 
-    const category = await this.categoryRepo.create(newCategory)
+    const product = await this.productRepo.create(newProduct)
 
-    return right({ category })
+    return right({ product })
   }
 }
