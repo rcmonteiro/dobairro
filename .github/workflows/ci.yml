@@ -22,6 +22,11 @@ jobs:
           POSTGRESQL_PASSWORD: docker
           POSTGRESQL_DATABASE: dobairro
 
+    env:
+      JWT_SECRET: testing
+      API_URL: http://localhost:4000
+      DB_URL: postgresql://docker:docker@localhost:5432/dobairro?schema=public
+
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -46,8 +51,3 @@ jobs:
  
       - name: Test
         run: pnpm test
-
-        env:
-          JWT_SECRET: testing
-          API_URL: http://localhost:4000
-          DB_URL: "postgresql://docker:docker@localhost:5432/dobairro?schema=public"
