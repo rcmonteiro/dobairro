@@ -1,10 +1,12 @@
 import { faker } from '@faker-js/faker/locale/pt_BR'
 import jwt from 'jsonwebtoken'
 
-import { db } from '@/database/prisma'
+import { PrismaService } from '@/database/prisma'
 import { env } from '@/env'
 
 export const makeOrganizationWithSignedUser = async () => {
+  const db = PrismaService.getInstance()
+
   const user = await db.user.create({
     data: {
       name: faker.person.fullName(),

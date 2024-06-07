@@ -6,7 +6,10 @@ import { config } from 'dotenv'
 
 import { env } from '@/env'
 
-config()
+config({
+  path: '.env',
+  override: true,
+})
 
 const db = new PrismaClient()
 

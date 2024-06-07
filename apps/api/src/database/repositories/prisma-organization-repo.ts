@@ -3,12 +3,15 @@ import type { Member } from '@dobairro/core/src/domain/entities/member'
 
 import { PrismaMemberMapper } from '@/database/mappers/prisma-member-mapper'
 import { PrismaOrganizationMapper } from '@/database/mappers/prisma-organization-mapper'
-import { db } from '@/database/prisma'
+
+import type { PrismaService } from '../prisma'
 
 export class PrismaOrganizationRepo implements OrganizationRepo {
+  constructor(private db: PrismaService) {}
+
   public async create(organization: Organization): Promise<Organization> {
     const data = PrismaOrganizationMapper.toPrisma(organization)
-    const dbOrganization = await db.organization.create({
+    const dbOrganization = await this.db.organization.create({
       data,
     })
     return PrismaOrganizationMapper.toDomain(dbOrganization)
@@ -16,7 +19,7 @@ export class PrismaOrganizationRepo implements OrganizationRepo {
 
   public async save(organization: Organization): Promise<Organization> {
     const data = PrismaOrganizationMapper.toPrisma(organization)
-    const dbOrganization = await db.organization.update({
+    const dbOrganization = await this.db.organization.update({
       data,
       where: {
         id: organization.id.toString(),
@@ -26,7 +29,7 @@ export class PrismaOrganizationRepo implements OrganizationRepo {
   }
 
   public async findById(organizationId: string): Promise<Organization | null> {
-    const organization = await db.organization.findUnique({
+    const organization = await this.db.organization.findUnique({
       where: {
         id: organizationId,
       },
@@ -40,7 +43,7 @@ export class PrismaOrganizationRepo implements OrganizationRepo {
   }
 
   public async findBySlug(slug: string): Promise<Organization | null> {
-    const organization = await db.organization.findUnique({
+    const organization = await this.db.organization.findUnique({
       where: {
         slug,
       },
@@ -57,7 +60,7 @@ export class PrismaOrganizationRepo implements OrganizationRepo {
     userId: string,
     organizationId: string,
   ): Promise<Member | null> {
-    const org = await db.organization.findUnique({
+    const org = await this.db.organization.findUnique({
       where: {
         id: organizationId,
       },
@@ -67,7 +70,7 @@ export class PrismaOrganizationRepo implements OrganizationRepo {
       return null
     }
 
-    const member = await db.member.findUnique({
+    const member = await this.db.member.findUnique({
       where: {
         organizationId_userId: {
           organizationId,

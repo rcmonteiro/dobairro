@@ -1,7 +1,7 @@
 import request from 'supertest'
 
 import { app } from '@/app'
-import { db } from '@/database/prisma'
+import { PrismaService } from '@/database/prisma'
 import { makeOrganizationWithSignedUser } from '@/tests/factories/make-organization-with-signed-user'
 
 describe('Create Category (e2e)', async () => {
@@ -14,6 +14,7 @@ describe('Create Category (e2e)', async () => {
 
   it('should be able to create a new category', async () => {
     const { organizationId, token } = await makeOrganizationWithSignedUser()
+    const db = PrismaService.getInstance()
 
     const response = await request(app.server)
       .post(`/organizations/${organizationId}/categories`)
@@ -22,7 +23,6 @@ describe('Create Category (e2e)', async () => {
         title: 'New Category',
       })
 
-    console.log(response.body)
     expect(response.statusCode).toEqual(201)
 
     const category = await db.category.findUnique({

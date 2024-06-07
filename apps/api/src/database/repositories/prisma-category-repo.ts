@@ -1,19 +1,22 @@
 import type { Category, CategoryRepo } from '@dobairro/core'
 
 import { PrismaCategoryMapper } from '@/database/mappers/prisma-category-mapper'
-import { db } from '@/database/prisma'
+
+import type { PrismaService } from '../prisma'
 
 export class PrismaCategoryRepo implements CategoryRepo {
+  constructor(private db: PrismaService) {}
+
   public async create(category: Category): Promise<Category> {
     const data = PrismaCategoryMapper.toPrisma(category)
-    const dbCategory = await db.category.create({
+    const dbCategory = await this.db.category.create({
       data,
     })
     return PrismaCategoryMapper.toDomain(dbCategory)
   }
 
   public async delete(category: Category): Promise<void> {
-    await db.category.delete({
+    await this.db.category.delete({
       where: {
         id: category.id.toString(),
         organizationId: category.organizationId.toString(),
@@ -22,7 +25,7 @@ export class PrismaCategoryRepo implements CategoryRepo {
   }
 
   public async findBySlug(slug: string): Promise<Category | null> {
-    const category = await db.category.findUnique({
+    const category = await this.db.category.findUnique({
       where: {
         slug,
       },
@@ -36,7 +39,7 @@ export class PrismaCategoryRepo implements CategoryRepo {
   }
 
   public async findById(categoryId: string): Promise<Category | null> {
-    const category = await db.category.findUnique({
+    const category = await this.db.category.findUnique({
       where: {
         id: categoryId,
       },
@@ -50,7 +53,7 @@ export class PrismaCategoryRepo implements CategoryRepo {
   }
 
   public async findManyByOrg(organizationId: string): Promise<Category[]> {
-    const categories = await db.category.findMany({
+    const categories = await this.db.category.findMany({
       where: {
         organizationId,
       },

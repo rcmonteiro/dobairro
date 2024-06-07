@@ -7,7 +7,7 @@ export default defineConfig({
     include: ['**/*.spec.ts'],
     globals: true,
     root: './',
-    setupFiles: ['./src/tests/setup-e2e.ts'],
+    setupFiles: ['dotenv/config', './src/tests/setup-e2e.ts'],
     dir: 'src',
   },
   plugins: [
