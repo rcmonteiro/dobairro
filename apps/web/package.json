@@ -24,10 +24,10 @@
   "devDependencies": {
     "@dobairro/eslint-config": "workspace:*",
     "@dobairro/prettier": "workspace:*",
-    "@types/node": "^20",
+    "@types/node": "^20.12.12",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
+    "postcss": "^8.4.38",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
