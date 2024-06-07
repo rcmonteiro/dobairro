@@ -1,5 +1,4 @@
 import type { TokenService } from '@/application/services/token-service'
-import type { User } from '@/domain/entities/user'
 
 import { type Either, left, right } from '../../either'
 import type { UserRepo } from '../../repositories/user-repo'
@@ -13,7 +12,7 @@ interface VerifyMagicLinkUseCaseRequest {
 type VerifyMagicLinkUseCaseResponse = Either<
   NotAllowedError | ResourceNotFoundError,
   {
-    user: User
+    token: string
   }
 >
 
@@ -38,6 +37,10 @@ export class VerifyMagicLinkUseCase {
       return left(new ResourceNotFoundError())
     }
 
-    return right({ user })
+    const token = await this.tokenService.sign({
+      userId: decodedToken.userId,
+    })
+
+    return right({ token })
   }
 }

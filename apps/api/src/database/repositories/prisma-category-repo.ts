@@ -1,7 +1,7 @@
 import type { Category, CategoryRepo } from '@dobairro/core'
 
-import { db } from '@/lib/prisma'
-import { PrismaCategoryMapper } from '@/mappers/prisma-category-mapper'
+import { PrismaCategoryMapper } from '@/database/mappers/prisma-category-mapper'
+import { db } from '@/database/prisma'
 
 export class PrismaCategoryRepo implements CategoryRepo {
   public async create(category: Category): Promise<Category> {

@@ -1,4 +1,3 @@
-import { env } from '@dobairro/env'
 import fastifyCors from '@fastify/cors'
 import fastifyJwt from '@fastify/jwt'
 import fastifySwagger from '@fastify/swagger'
@@ -11,6 +10,9 @@ import {
   ZodTypeProvider,
 } from 'fastify-type-provider-zod'
 
+import { env } from '@/env'
+
+import { createCategoryController } from './controllers/create-category'
 import { errorHandler } from './error-handler'
 
 export const app = fastify()
@@ -49,5 +51,7 @@ app.register(fastifySwaggerUI, {
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
 })
+
+app.register(createCategoryController)
 
 app.register(fastifyCors)

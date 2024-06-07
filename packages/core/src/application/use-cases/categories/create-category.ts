@@ -10,7 +10,7 @@ import { NotAllowedError } from '../_errors/not-allowed-error'
 import { ResourceAlreadyExistsError } from '../_errors/resource-already-exists-error'
 
 interface CreateCategoryUseCaseRequest {
-  userId: string
+  authenticatedUserId: string
   organizationId: string
   title: string
 }
@@ -32,7 +32,7 @@ export class CreateCategoryUseCase {
     dto: CreateCategoryUseCaseRequest,
   ): Promise<CreateCategoryUseCaseResponse> {
     const membership = await this.organizationRepo.getMembership(
-      dto.userId,
+      dto.authenticatedUserId,
       dto.organizationId,
     )
 
@@ -43,7 +43,7 @@ export class CreateCategoryUseCase {
     }
 
     const { cannot } = getUserPermissions(
-      dto.userId.toString(),
+      dto.authenticatedUserId.toString(),
       membership.role,
     )
 

@@ -3,11 +3,11 @@ import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
-import { makeCreateOrganization } from '@/factories/make-create-organization'
-import { auth } from '@/middleware/auth'
+import { makeCreateOrganization } from '@/application/factories/make-create-organization'
 
 import { BadRequestError } from './_errors/bad-request-error'
 import { UnauthorizedError } from './_errors/unauthorized-error'
+import { auth } from './middleware/auth'
 
 export const createOrganizationController = async (app: FastifyInstance) => {
   app
@@ -36,7 +36,7 @@ export const createOrganizationController = async (app: FastifyInstance) => {
         },
       },
       async (request, reply) => {
-        const userId = await request.getCurrentUserId()
+        const { userId } = await request.getCurrentUser()
         const { name } = request.body
 
         const createOrganization = makeCreateOrganization()

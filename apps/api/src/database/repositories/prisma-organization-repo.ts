@@ -1,9 +1,9 @@
 import type { Organization, OrganizationRepo } from '@dobairro/core'
 import type { Member } from '@dobairro/core/src/domain/entities/member'
 
-import { db } from '@/lib/prisma'
-import { PrismaMemberMapper } from '@/mappers/prisma-member-mapper'
-import { PrismaOrganizationMapper } from '@/mappers/prisma-organization-mapper'
+import { PrismaMemberMapper } from '@/database/mappers/prisma-member-mapper'
+import { PrismaOrganizationMapper } from '@/database/mappers/prisma-organization-mapper'
+import { db } from '@/database/prisma'
 
 export class PrismaOrganizationRepo implements OrganizationRepo {
   public async create(organization: Organization): Promise<Organization> {
@@ -12,6 +12,31 @@ export class PrismaOrganizationRepo implements OrganizationRepo {
       data,
     })
     return PrismaOrganizationMapper.toDomain(dbOrganization)
+  }
+
+  public async save(organization: Organization): Promise<Organization> {
+    const data = PrismaOrganizationMapper.toPrisma(organization)
+    const dbOrganization = await db.organization.update({
+      data,
+      where: {
+        id: organization.id.toString(),
+      },
+    })
+    return PrismaOrganizationMapper.toDomain(dbOrganization)
+  }
+
+  public async findById(organizationId: string): Promise<Organization | null> {
+    const organization = await db.organization.findUnique({
+      where: {
+        id: organizationId,
+      },
+    })
+
+    if (!organization) {
+      return null
+    }
+
+    return PrismaOrganizationMapper.toDomain(organization)
   }
 
   public async findBySlug(slug: string): Promise<Organization | null> {

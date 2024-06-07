@@ -24,7 +24,7 @@ describe('Create Category Use case - unit tests', () => {
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
     const result = await sut.execute({
-      userId: newUser.id.toString(),
+      authenticatedUserId: newUser.id.toString(),
       organizationId: newOrganization.id.toString(),
       title: 'Category A',
     })
@@ -38,12 +38,12 @@ describe('Create Category Use case - unit tests', () => {
     userRepo.create(newUser)
     organizationRepo.create(newOrganization)
     await sut.execute({
-      userId: newUser.id.toString(),
+      authenticatedUserId: newUser.id.toString(),
       organizationId: newOrganization.id.toString(),
       title: 'Category A',
     })
     const result = await sut.execute({
-      userId: newUser.id.toString(),
+      authenticatedUserId: newUser.id.toString(),
       organizationId: newOrganization.id.toString(),
       title: 'Category A',
     })

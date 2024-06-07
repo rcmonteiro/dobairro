@@ -31,15 +31,14 @@ model Organization {
   id        String   @id @default(uuid())
   name      String
   slug      String   @unique
-  avatarUrl String?  @map("avatar_url")
   createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
   owner     User     @relation(fields: [ownerId], references: [id])
   ownerId   String   @map("owner_id")
   members   Member[]
 
-  theme    Theme      @relation(fields: [themeId], references: [id])
-  themeId  String     @map("theme_id")
+  theme    Theme?      @relation(fields: [themeId], references: [id])
+  themeId  String?     @map("theme_id")
   Category Category[]
 
   @@map("organizations")
