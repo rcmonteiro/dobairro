@@ -27,6 +27,10 @@ export class Product extends Entity<IProduct> {
     return this.state.title
   }
 
+  public set title(title: string) {
+    this.state.title = title
+  }
+
   public get slug(): Slug {
     return this.state.slug
   }
@@ -35,8 +39,16 @@ export class Product extends Entity<IProduct> {
     return this.state.description
   }
 
+  public set description(description: string) {
+    this.state.description = description
+  }
+
   public get categoryId(): Id {
     return this.state.categoryId
+  }
+
+  public set categoryId(categoryId: Id) {
+    this.state.categoryId = categoryId
   }
 
   public get image(): string | undefined {
@@ -45,6 +57,10 @@ export class Product extends Entity<IProduct> {
 
   public get price(): number {
     return this.state.price
+  }
+
+  public set price(price: number) {
+    this.state.price = price
   }
 
   public get createdAt(): Date | undefined {

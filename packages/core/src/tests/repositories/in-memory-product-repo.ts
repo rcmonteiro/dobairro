@@ -14,6 +14,12 @@ export class InMemoryProductRepo implements ProductRepo {
     this.items = this.items.filter((item) => !item.id.equals(data.id))
   }
 
+  public async save(data: Product): Promise<Product> {
+    const index = this.items.findIndex((item) => item.id.equals(data.id))
+    this.items[index] = data
+    return data
+  }
+
   public async findBySlug(
     slug: string,
     organizationId: string,
