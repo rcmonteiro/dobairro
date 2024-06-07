@@ -49,4 +49,5 @@ jobs:
 
         env:
           JWT_SECRET: testing
-          DATABASE_URL: "postgresql://docker:docker@localhost:5432/dobairro?schema=public"
+          API_URL: http://localhost:4000
+          DB_URL: "postgresql://docker:docker@localhost:5432/dobairro?schema=public"
