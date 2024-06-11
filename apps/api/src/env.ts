@@ -8,6 +8,7 @@ const envSchema = z.object({
   API_URL: z.string().url(),
   DB_URL: z.string().url(),
   JWT_SECRET: z.string(),
+  RESEND_API_KEY: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

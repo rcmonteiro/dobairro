@@ -9,7 +9,13 @@ export * from './application/repositories/user-repo'
 export * from './application/use-cases/_errors/user-already-exists-error'
 export * from './application/use-cases/categories/create-category'
 export * from './application/use-cases/organizations/create-organization'
+export * from './application/use-cases/users/authenticate-magic-link'
 export * from './application/use-cases/users/register'
+export * from './application/use-cases/users/verify-magic-link'
+
+// Services
+export * from './application/services/email-service'
+export * from './application/services/token-service'
 
 // Entities
 export * from './domain/entities/category'

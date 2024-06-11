@@ -48,6 +48,7 @@
     "fastify-type-provider-zod": "^1.1.9",
     "jsonwebtoken": "^9.0.2",
     "prisma": "^5.14.0",
+    "resend": "^3.2.0",
     "zod": "^3.23.8"
   },
   "prettier": "@dobairro/prettier",
