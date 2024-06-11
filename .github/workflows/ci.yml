@@ -11,7 +11,22 @@ jobs:
     name: Build and Test
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    
+
+    services:
+      postgres:
+        image: bitnami/postgresql
+        ports:
+          - 5432:5432
+        env:
+          POSTGRESQL_USERNAME: docker
+          POSTGRESQL_PASSWORD: docker
+          POSTGRESQL_DATABASE: dobairro
+
+    env:
+      JWT_SECRET: testing
+      API_URL: http://localhost:4000
+      DB_URL: postgresql://docker:docker@localhost:5432/dobairro?schema=public
+
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -33,6 +48,21 @@ jobs:
  
       - name: Build
         run: pnpm build
+
+      - name: Unit Tests on packages/core
+        run: |
+          cd packages/core
+          pnpm run test
  
-      - name: Test
-        run: pnpm test
+      - name: E2E Tests on apps/api
+        run: |
+          cd apps/api
+          pnpm run db:generate
+          pnpm run db:deploy
+          pnpm run test
+        env:
+          JWT_SECRET: testing
+          API_URL: http://localhost:4000
+          DB_URL: postgresql://docker:docker@localhost:5432/dobairro?schema=public
+  
+        

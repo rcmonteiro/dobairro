@@ -15,12 +15,17 @@ datasource db {
 
 model User {
   id                 String         @id @default(uuid())
-  name               String?
+  name               String
   email              String         @unique
+  street             String
+  city               String
+  state              String
+  zipCode            String
+  number             String
   passwordHash       String?        @map("password_hash")
   avatarUrl          String?        @map("avatar_url")
   createdAt          DateTime       @default(now()) @map("created_at")
-  updatedAt          DateTime       @updatedAt @map("updated_at")
+  updatedAt          DateTime?      @updatedAt @map("updated_at")
   owns_organizations Organization[]
   members            Member[]
 
@@ -28,18 +33,17 @@ model User {
 }
 
 model Organization {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
-  slug      String   @unique
-  avatarUrl String?  @map("avatar_url")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  owner     User     @relation(fields: [ownerId], references: [id])
-  ownerId   String   @map("owner_id")
+  slug      String    @unique
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  owner     User      @relation(fields: [ownerId], references: [id])
+  ownerId   String    @map("owner_id")
   members   Member[]
 
-  theme    Theme      @relation(fields: [themeId], references: [id])
-  themeId  String     @map("theme_id")
+  theme    Theme?     @relation(fields: [themeId], references: [id])
+  themeId  String?    @map("theme_id")
   Category Category[]
 
   @@map("organizations")

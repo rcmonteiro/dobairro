@@ -5,6 +5,9 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+
+import { isAuthenticated } from '@/auth'
 
 import logo from '../../assets/logo-dobairro.svg'
 
@@ -23,6 +26,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  if (isAuthenticated()) {
+    return redirect('/dashboard')
+  }
   return (
     <html
       className="scroll-smooth antialiased selection:bg-primary selection:text-white"

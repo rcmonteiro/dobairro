@@ -1,0 +1,27 @@
+services:
+  db:
+    container_name: dobairro-db
+    image: bitnami/postgresql:latest
+    restart: always
+    environment:
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_USER=docker
+      - POSTGRESQL_DATABASE=dobairro
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/bitnami/postgresql
+    networks:
+      - dobairro-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  dobairro-network:
+    driver: bridge
+
+volumes:
+  db-data:

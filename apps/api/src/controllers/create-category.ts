@@ -3,22 +3,25 @@ import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
-import { makeCreateCategory } from '@/factories/make-create-category'
-import { auth } from '@/middleware/auth'
+import { makeCreateCategory } from '@/application/factories/make-create-category'
 
 import { BadRequestError } from './_errors/bad-request-error'
 import { UnauthorizedError } from './_errors/unauthorized-error'
+import { auth } from './middleware/auth'
 
 export const createCategoryController = async (app: FastifyInstance) => {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
     .post(
-      '/categories',
+      '/organizations/:organizationId/categories',
       {
         schema: {
           tags: ['Category'],
           summary: 'Create a new Category',
+          params: z.object({
+            organizationId: z.string().uuid(),
+          }),
           body: z.object({
             title: z.string().min(3),
           }),
@@ -27,7 +30,7 @@ export const createCategoryController = async (app: FastifyInstance) => {
               categoryId: z.string().uuid(),
             }),
             400: z.object({
-              message: z.string(),
+              message: z.unknown(),
             }),
             401: z.object({
               message: z.string(),
@@ -36,12 +39,13 @@ export const createCategoryController = async (app: FastifyInstance) => {
         },
       },
       async (request, reply) => {
-        const { userId, organizationId } = await request.getCurrentUser()
+        const { userId } = await request.getCurrentUser()
         const { title } = request.body
+        const { organizationId } = request.params
 
         const createCategory = makeCreateCategory()
         const result = await createCategory.execute({
-          userId,
+          authenticatedUserId: userId,
           organizationId,
           title,
         })
@@ -59,7 +63,7 @@ export const createCategoryController = async (app: FastifyInstance) => {
         const category = result.value.category
 
         return reply.status(201).send({
-          categoryId: category.id,
+          categoryId: category.id.toString(),
         })
       },
     )

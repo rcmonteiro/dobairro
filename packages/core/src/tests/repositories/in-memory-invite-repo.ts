@@ -3,9 +3,6 @@ import type { Invite } from '@/domain/entities/invite'
 import { Id } from '@/domain/types/id'
 
 export class InMemoryInviteRepo implements InviteRepo {
-  findManyById(userId: string): Promise<Invite[]> {
-    throw new Error('Method not implemented.')
-  }
   public items: Invite[] = []
 
   public async create(data: Invite): Promise<Invite> {

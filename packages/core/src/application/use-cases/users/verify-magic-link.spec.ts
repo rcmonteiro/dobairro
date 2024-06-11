@@ -1,4 +1,3 @@
-import { User } from '@/domain/entities/user'
 import { makeNewUser } from '@/tests/factories/make-new-user'
 import { InMemoryUserRepo } from '@/tests/repositories/in-memory-user-repo'
 import { FakeTokenService } from '@/tests/services/fake-token-service'
@@ -31,7 +30,7 @@ describe('Verify Magic Link Use case - unit tests', () => {
 
     expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
-      expect(result.value.user).toBeInstanceOf(User)
+      expect(result.value.token).toBeDefined()
     }
   })
 

@@ -1,24 +1,9 @@
-'use client'
-
-import { Button, Heading, Input, Label, Text } from '@dobairro/design-system'
+import { Button, Heading, Text } from '@dobairro/design-system'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import type { FormEvent } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
 
-import { authenticate } from '@/actions/auth/authenticate'
+import { SignInForm } from './sign-in-form'
 
 export default function SignIn() {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined)
-  const { pending } = useFormStatus()
-  const router = useRouter()
-
-  const handleSubmit = (event: FormEvent) => {
-    if (pending) {
-      event.preventDefault()
-    }
-    router.push('/dashboard')
-  }
   return (
     <>
       <div className="p-8">
@@ -30,20 +15,7 @@ export default function SignIn() {
             <Heading size="lg">Acessar painel</Heading>
             <Text>Acompanhe suas vendas pelo painel Do Bairro</Text>
           </div>
-          <form className="space-y-6" action={dispatch}>
-            <div className="space-y-2">
-              <Label htmlFor="email">Seu e-mail</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Digite seu melhor e-mail"
-              />
-            </div>
-            <div>{errorMessage ? <p>{errorMessage}</p> : null}</div>
-            <Button className="w-full" onClick={handleSubmit}>
-              Acessar painel
-            </Button>
-          </form>
+          <SignInForm />
         </div>
       </div>
     </>

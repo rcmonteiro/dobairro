@@ -10,6 +10,15 @@ export class FakeTokenService implements TokenService {
     })
   }
 
+  public async sign(data: Record<string, unknown>): Promise<string> {
+    const expirationDate = new Date()
+    expirationDate.setDate(new Date().getDate() + 2)
+    return JSON.stringify({
+      ...data,
+      expirationDate,
+    })
+  }
+
   public async verify(token: string): Promise<IToken | null> {
     try {
       return JSON.parse(token)

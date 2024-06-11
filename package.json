@@ -13,7 +13,7 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "turbo": "1.2.5"
+    "turbo": "latest"
   },
   "workspaces": [
     "config/*",

@@ -1,6 +1,8 @@
 import request from 'supertest'
 
 import { app } from '@/app'
+import { PrismaService } from '@/database/prisma'
+import { makeOrganizationWithSignedUser } from '@/tests/factories/make-organization-with-signed-user'
 
 describe('Create Category (e2e)', async () => {
   beforeAll(async () => {
@@ -11,20 +13,25 @@ describe('Create Category (e2e)', async () => {
   })
 
   it('should be able to create a new category', async () => {
-    const responseSignup = await request(app.server).post('/users').send({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '123456',
-    })
-    expect(responseSignup.statusCode).toEqual(201)
+    const { organizationId, token } = await makeOrganizationWithSignedUser()
+    const db = PrismaService.getInstance()
 
-    const responseSignin = await request(app.server).post('/sessions').send({
-      email: 'john@doe.com',
-      password: '123456',
+    const response = await request(app.server)
+      .post(`/organizations/${organizationId}/categories`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        title: 'New Category',
+      })
+
+    expect(response.statusCode).toEqual(201)
+
+    const category = await db.category.findUnique({
+      where: {
+        id: response.body.categoryId,
+      },
     })
-    expect(responseSignin.statusCode).toEqual(200)
-    expect(responseSignin.body).toEqual({
-      token: expect.any(String),
-    })
+
+    expect(category).toBeTruthy()
+    expect(category?.title).toEqual('New Category')
   })
 })

@@ -3,7 +3,9 @@ import '../globals.css'
 
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
+import { redirect } from 'next/navigation'
 
+import { isAuthenticated } from '@/auth'
 import { Sidebar } from '@/components/panel/sidebar'
 
 const defaultFont = Open_Sans({
@@ -21,6 +23,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  if (!isAuthenticated()) {
+    return redirect('/sign-in')
+  }
   return (
     <html
       className="scroll-smooth antialiased selection:bg-primary selection:text-white"

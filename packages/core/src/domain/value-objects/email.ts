@@ -1,5 +1,4 @@
-import { TextValidator } from '@/utils/text-validator'
-
+import { TextValidator } from '../../utils/text-validator'
 import { ValueObject } from '../types/value-object'
 
 export class Email extends ValueObject<string> {

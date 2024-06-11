@@ -1,3 +1,4 @@
+import type { EmailService } from '@/application/services/email-service'
 import type { TokenService } from '@/application/services/token-service'
 
 import { type Either, left, right } from '../../either'
@@ -19,6 +20,7 @@ export class AuthenticateMagicLinkUseCase {
   constructor(
     private userRepo: UserRepo,
     private tokenService: TokenService,
+    private emailService: EmailService,
   ) {}
 
   public async execute(
@@ -33,6 +35,20 @@ export class AuthenticateMagicLinkUseCase {
     const token = await this.tokenService.generate({
       userId: user.id.toString(),
     })
+
+    const emailSent = await this.emailService.send({
+      to: user.email.value,
+      subject: '👋 Link de acesso - Do Bairro',
+      html: `
+        <p>Olá ${user.name},</p>
+        <p>Para acessar sua conta, clique no link abaixo:</p>
+        <p><a href="http://localhost:3000/api/callback/magic-link?token=${token}">Acessar minha conta</a></p>
+      `,
+    })
+
+    if (!emailSent) {
+      return left(new ResourceNotFoundError())
+    }
 
     return right({ token })
   }
