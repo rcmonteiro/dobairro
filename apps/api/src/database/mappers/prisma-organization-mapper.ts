@@ -9,7 +9,9 @@ export class PrismaOrganizationMapper {
       id: organization.id.toString(),
       ownerId: organization.ownerId.toString(),
       name: organization.name,
-      themeId: organization.themeId.toString(),
+      themeId: organization.themeId
+        ? organization.themeId.toString()
+        : undefined,
       slug: organization.slug._value,
       createdAt: organization.createdAt,
       updatedAt: organization.updatedAt,
@@ -21,10 +23,10 @@ export class PrismaOrganizationMapper {
       {
         ownerId: new Id(raw.ownerId),
         name: raw.name,
-        themeId: new Id(raw.themeId),
+        themeId: raw.themeId ? new Id(raw.themeId) : undefined,
         slug: Slug.create(raw.slug),
         createdAt: raw.createdAt,
-        updatedAt: raw.updatedAt,
+        updatedAt: raw.updatedAt ?? undefined,
       },
       new Id(raw.id),
     )

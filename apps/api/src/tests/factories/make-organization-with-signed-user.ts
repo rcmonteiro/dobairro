@@ -11,6 +11,11 @@ export const makeOrganizationWithSignedUser = async () => {
     data: {
       name: faker.person.fullName(),
       email: faker.internet.email(),
+      city: faker.location.city(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
+      street: faker.location.street(),
+      number: String(faker.number.int({ min: 9, max: 99 })),
     },
   })
   const organization = await db.organization.create({

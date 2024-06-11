@@ -12,6 +12,7 @@ import {
 
 import { env } from '@/env'
 
+import { signUpController } from './controllers/auth/sign-up'
 import { createCategoryController } from './controllers/create-category'
 import { errorHandler } from './error-handler'
 
@@ -53,5 +54,7 @@ app.register(fastifyJwt, {
 })
 
 app.register(createCategoryController)
+
+app.register(signUpController)
 
 app.register(fastifyCors)
